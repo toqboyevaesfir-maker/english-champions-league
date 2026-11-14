@@ -1,0 +1,794 @@
+{
+  "title": "Advanced Grammar — Unit 1 — Variant 2",
+  "unit": 1,
+  "variant": 2,
+  "topics": [
+    "State verbs",
+    "Verbs with state and action meanings",
+    "Mental state verbs",
+    "Performative verbs"
+  ],
+  "questionCount": 30,
+  "questions": [
+    {
+      "id": 1,
+      "question": "I ______ these figures to be accurate; they were checked independently on two occasions.",
+      "options": [
+        {
+          "key": "a",
+          "text": "am believing"
+        },
+        {
+          "key": "b",
+          "text": "believes"
+        },
+        {
+          "key": "c",
+          "text": "believe"
+        },
+        {
+          "key": "d",
+          "text": "have been believing"
+        }
+      ],
+      "correctAnswer": "c",
+      "explanation": "Believe is a state verb expressing an opinion, so the present simple is used.",
+      "whyOthersAreIncorrect": "am believing: not normally used in the continuous; believes: wrong with I; have been believing: continuous form is unsuitable here.",
+      "tip": "Compare: I believe he is right."
+    },
+    {
+      "id": 2,
+      "question": "The programme ______ of six taught modules and a substantial research project.",
+      "options": [
+        {
+          "key": "a",
+          "text": "is consisting"
+        },
+        {
+          "key": "b",
+          "text": "consist"
+        },
+        {
+          "key": "c",
+          "text": "has been consisting"
+        },
+        {
+          "key": "d",
+          "text": "consists"
+        }
+      ],
+      "correctAnswer": "d",
+      "explanation": "Consist of describes the permanent composition of something and is used in the simple form.",
+      "whyOthersAreIncorrect": "is consisting and has been consisting: consist of is not normally continuous; consist: wrong with the singular subject programme.",
+      "tip": "Be made up of and comprise are similar alternatives."
+    },
+    {
+      "id": 3,
+      "question": "To anyone who grew up in the eighties, the opening track ______ remarkably familiar.",
+      "options": [
+        {
+          "key": "a",
+          "text": "sounds"
+        },
+        {
+          "key": "b",
+          "text": "is sounding"
+        },
+        {
+          "key": "c",
+          "text": "sound"
+        },
+        {
+          "key": "d",
+          "text": "has been sounding"
+        }
+      ],
+      "correctAnswer": "a",
+      "explanation": "Sound meaning give an impression is a state verb; the track has a general characteristic.",
+      "whyOthersAreIncorrect": "is sounding: unsuitable for this general impression; sound: wrong subject-verb agreement; has been sounding: unsuitable continuous form.",
+      "tip": "The proposal sounds sensible."
+    },
+    {
+      "id": 4,
+      "question": "The twins usually dread visitors, but they ______ having their cousins to stay this week.",
+      "options": [
+        {
+          "key": "a",
+          "text": "love"
+        },
+        {
+          "key": "b",
+          "text": "are loving"
+        },
+        {
+          "key": "c",
+          "text": "loves"
+        },
+        {
+          "key": "d",
+          "text": "have been loving"
+        }
+      ],
+      "correctAnswer": "b",
+      "explanation": "The contrast with usually and the temporary period this week supports the present continuous.",
+      "whyOthersAreIncorrect": "love: does not express the temporary contrast as intended; loves: wrong with they; have been loving: unnatural here.",
+      "tip": "Some verbs such as love can take continuous forms for temporary or emphatic situations."
+    },
+    {
+      "id": 5,
+      "question": "As a rule the gallery attracts an older audience, but this season it ______ a noticeably younger crowd.",
+      "options": [
+        {
+          "key": "a",
+          "text": "attracts"
+        },
+        {
+          "key": "b",
+          "text": "attract"
+        },
+        {
+          "key": "c",
+          "text": "is attracting"
+        },
+        {
+          "key": "d",
+          "text": "has been attracted"
+        }
+      ],
+      "correctAnswer": "c",
+      "explanation": "As a rule describes the usual situation; this season describes a temporary change.",
+      "whyOthersAreIncorrect": "attracts: misses the contrast; attract: wrong with it; has been attracted: passive and changes the meaning.",
+      "tip": "Usual pattern: present simple; temporary trend: present continuous."
+    },
+    {
+      "id": 6,
+      "question": "Which of the following sentences is incorrect?",
+      "options": [
+        {
+          "key": "a",
+          "text": "The proposal sounds perfectly sensible to me."
+        },
+        {
+          "key": "b",
+          "text": "She's staying at a hotel until the flat is ready."
+        },
+        {
+          "key": "c",
+          "text": "The kit consists of ten precision tools."
+        },
+        {
+          "key": "d",
+          "text": "I'm doubting his account of what happened."
+        }
+      ],
+      "correctAnswer": "d",
+      "explanation": "Doubt is normally a state verb and is not usually used in the present continuous in this meaning.",
+      "whyOthersAreIncorrect": "The other sentences are acceptable: sounds gives an impression; is staying describes a temporary arrangement; consists describes composition.",
+      "tip": "Use: I doubt his account."
+    },
+    {
+      "id": 7,
+      "question": "She rarely does theatre work, but she ______ in a musical for the next six weeks.",
+      "options": [
+        {
+          "key": "a",
+          "text": "is appearing"
+        },
+        {
+          "key": "b",
+          "text": "appears"
+        },
+        {
+          "key": "c",
+          "text": "appear"
+        },
+        {
+          "key": "d",
+          "text": "has been appearing"
+        }
+      ],
+      "correctAnswer": "a",
+      "explanation": "Appear meaning perform or take part is an action; the limited future period supports the present continuous.",
+      "whyOthersAreIncorrect": "appears: suggests a regular occurrence; appear: wrong with she; has been appearing: does not fit the stated upcoming period.",
+      "tip": "Appear can mean seem (state) or perform (action)."
+    },
+    {
+      "id": 8,
+      "question": "I ______ that the meeting will be relatively short, given how little there is on the agenda.",
+      "options": [
+        {
+          "key": "a",
+          "text": "am expecting"
+        },
+        {
+          "key": "b",
+          "text": "expect"
+        },
+        {
+          "key": "c",
+          "text": "expects"
+        },
+        {
+          "key": "d",
+          "text": "have been expecting"
+        }
+      ],
+      "correctAnswer": "b",
+      "explanation": "Expect in a that-clause means suppose or think, so the present simple is natural.",
+      "whyOthersAreIncorrect": "am expecting: usually means waiting for something here; expects: wrong with I; have been expecting: unnatural for this opinion.",
+      "tip": "I expect that it will be short."
+    },
+    {
+      "id": 9,
+      "question": "Don't go out just yet - we ______ visitors at any moment.",
+      "options": [
+        {
+          "key": "a",
+          "text": "expect"
+        },
+        {
+          "key": "b",
+          "text": "expects"
+        },
+        {
+          "key": "c",
+          "text": "are expecting"
+        },
+        {
+          "key": "d",
+          "text": "have been expecting"
+        }
+      ],
+      "correctAnswer": "c",
+      "explanation": "Expect means wait for or anticipate someone's arrival; this is a current situation.",
+      "whyOthersAreIncorrect": "expect: less suitable for the immediate arrangement; expects: wrong with we; have been expecting: unnecessary perfect continuous form.",
+      "tip": "We're expecting visitors."
+    },
+    {
+      "id": 10,
+      "question": "Please stay still for a moment - the doctor ______ your arm to see where the pain is.",
+      "options": [
+        {
+          "key": "a",
+          "text": "feels"
+        },
+        {
+          "key": "b",
+          "text": "feel"
+        },
+        {
+          "key": "c",
+          "text": "has been feeling"
+        },
+        {
+          "key": "d",
+          "text": "is feeling"
+        }
+      ],
+      "correctAnswer": "d",
+      "explanation": "Feel means touch or examine with the hand here, describing an action happening now.",
+      "whyOthersAreIncorrect": "feels: simple form does not express the action in progress; feel: wrong agreement; has been feeling: does not fit the immediate instruction.",
+      "tip": "Compare: I feel we should wait / The doctor is feeling your arm."
+    },
+    {
+      "id": 11,
+      "question": "I ______ strongly that we should postpone the decision until the spring.",
+      "options": [
+        {
+          "key": "a",
+          "text": "feel"
+        },
+        {
+          "key": "b",
+          "text": "am feeling"
+        },
+        {
+          "key": "c",
+          "text": "feels"
+        },
+        {
+          "key": "d",
+          "text": "have been feeling"
+        }
+      ],
+      "correctAnswer": "a",
+      "explanation": "Feel means hold an opinion here, so the present simple is used.",
+      "whyOthersAreIncorrect": "am feeling: usually describes a temporary physical or emotional condition; feels: wrong with I; have been feeling: unsuitable for this opinion.",
+      "tip": "I feel that we should wait."
+    },
+    {
+      "id": 12,
+      "question": "You ______ things - nobody in this office said anything of the sort.",
+      "options": [
+        {
+          "key": "a",
+          "text": "imagine"
+        },
+        {
+          "key": "b",
+          "text": "are imagining"
+        },
+        {
+          "key": "c",
+          "text": "imagines"
+        },
+        {
+          "key": "d",
+          "text": "have been imagining"
+        }
+      ],
+      "correctAnswer": "b",
+      "explanation": "The context refers to something the listener is currently imagining incorrectly; the continuous form emphasizes the ongoing mental activity.",
+      "whyOthersAreIncorrect": "imagine: less suited to the immediate accusation; imagines: wrong with you; have been imagining: unnecessarily emphasizes duration.",
+      "tip": "Compare: I imagine it will rain (suppose) with You're imagining things."
+    },
+    {
+      "id": 13,
+      "question": "The proposal ______ promising on paper, but the costings are completely unrealistic.",
+      "options": [
+        {
+          "key": "a",
+          "text": "is looking"
+        },
+        {
+          "key": "b",
+          "text": "look"
+        },
+        {
+          "key": "c",
+          "text": "looks"
+        },
+        {
+          "key": "d",
+          "text": "has been looking"
+        }
+      ],
+      "correctAnswer": "c",
+      "explanation": "Look means seem or give an impression here, so the present simple is used.",
+      "whyOthersAreIncorrect": "is looking: not the normal form for this general impression; look: wrong with the singular subject; has been looking: unsuitable.",
+      "tip": "The plan looks promising."
+    },
+    {
+      "id": 14,
+      "question": "After the refurbishment, the main hall ______ eighteen metres by twelve.",
+      "options": [
+        {
+          "key": "a",
+          "text": "is measuring"
+        },
+        {
+          "key": "b",
+          "text": "measure"
+        },
+        {
+          "key": "c",
+          "text": "has been measuring"
+        },
+        {
+          "key": "d",
+          "text": "measures"
+        }
+      ],
+      "correctAnswer": "d",
+      "explanation": "Measure means have particular dimensions here; this is a characteristic, so use the present simple.",
+      "whyOthersAreIncorrect": "is measuring and has been measuring: describe an act of measuring; measure: wrong with the singular subject.",
+      "tip": "The room measures five metres by four."
+    },
+    {
+      "id": 15,
+      "question": "I ______ Bukhara one of the most beautiful cities I have ever visited.",
+      "options": [
+        {
+          "key": "a",
+          "text": "find"
+        },
+        {
+          "key": "b",
+          "text": "am finding"
+        },
+        {
+          "key": "c",
+          "text": "finds"
+        },
+        {
+          "key": "d",
+          "text": "have been finding"
+        }
+      ],
+      "correctAnswer": "a",
+      "explanation": "Find means consider or judge something to be a certain way; this is a general evaluation.",
+      "whyOthersAreIncorrect": "am finding: suggests a developing opinion; finds: wrong with I; have been finding: unnatural here.",
+      "tip": "Find + object + adjective is common: I find it useful."
+    },
+    {
+      "id": 16,
+      "question": "I ______ the new software easier and easier now that I use it every single day.",
+      "options": [
+        {
+          "key": "a",
+          "text": "find"
+        },
+        {
+          "key": "b",
+          "text": "am finding"
+        },
+        {
+          "key": "c",
+          "text": "finds"
+        },
+        {
+          "key": "d",
+          "text": "have been found"
+        }
+      ],
+      "correctAnswer": "b",
+      "explanation": "Easier and easier shows a changing evaluation developing over time, so the present continuous is appropriate.",
+      "whyOthersAreIncorrect": "find: does not highlight the developing change; finds: wrong with I; have been found: passive and incorrect in meaning.",
+      "tip": "Compare: I find it difficult / I'm finding it easier."
+    },
+    {
+      "id": 17,
+      "question": "At last I ______ why she reacted the way she did at the meeting.",
+      "options": [
+        {
+          "key": "a",
+          "text": "am understanding"
+        },
+        {
+          "key": "b",
+          "text": "understands"
+        },
+        {
+          "key": "c",
+          "text": "understand"
+        },
+        {
+          "key": "d",
+          "text": "have been understanding"
+        }
+      ],
+      "correctAnswer": "c",
+      "explanation": "Understand is normally a state verb. At last indicates that the speaker now has the understanding.",
+      "whyOthersAreIncorrect": "am understanding and have been understanding: not normally used in this sense; understands: wrong with I.",
+      "tip": "A natural alternative is I'm beginning to understand."
+    },
+    {
+      "id": 18,
+      "question": "I ______ this is the most workable solution currently available to us.",
+      "options": [
+        {
+          "key": "a",
+          "text": "am thinking"
+        },
+        {
+          "key": "b",
+          "text": "thinks"
+        },
+        {
+          "key": "c",
+          "text": "have been thinking"
+        },
+        {
+          "key": "d",
+          "text": "think"
+        }
+      ],
+      "correctAnswer": "d",
+      "explanation": "Think means hold an opinion here, so the present simple is used.",
+      "whyOthersAreIncorrect": "am thinking: describes considering or deliberating; thinks: wrong with I; have been thinking: emphasizes a process rather than the stated opinion.",
+      "tip": "I think you're right / I'm thinking about it."
+    },
+    {
+      "id": 19,
+      "question": "We ______ of relocating the office to a smaller site next year.",
+      "options": [
+        {
+          "key": "a",
+          "text": "are thinking"
+        },
+        {
+          "key": "b",
+          "text": "think"
+        },
+        {
+          "key": "c",
+          "text": "thinks"
+        },
+        {
+          "key": "d",
+          "text": "have been thought"
+        }
+      ],
+      "correctAnswer": "a",
+      "explanation": "Think of + -ing means consider or plan; this is an ongoing consideration.",
+      "whyOthersAreIncorrect": "think: does not express the current developing plan as clearly; thinks: wrong with we; have been thought: passive and incorrect.",
+      "tip": "Be thinking of + -ing often introduces a possible plan."
+    },
+    {
+      "id": 20,
+      "question": "The report ______ that the existing system is no longer safe to operate.",
+      "options": [
+        {
+          "key": "a",
+          "text": "is concluding"
+        },
+        {
+          "key": "b",
+          "text": "concludes"
+        },
+        {
+          "key": "c",
+          "text": "conclude"
+        },
+        {
+          "key": "d",
+          "text": "has been concluding"
+        }
+      ],
+      "correctAnswer": "b",
+      "explanation": "In academic style, concludes that introduces the conclusion stated by a report.",
+      "whyOthersAreIncorrect": "is concluding and has been concluding: unnatural for this reporting function; conclude: wrong with the singular subject.",
+      "tip": "The report concludes / argues / suggests that..."
+    },
+    {
+      "id": 21,
+      "question": "I ______ that the money will be back in your account by Friday afternoon.",
+      "options": [
+        {
+          "key": "a",
+          "text": "am promising"
+        },
+        {
+          "key": "b",
+          "text": "promises"
+        },
+        {
+          "key": "c",
+          "text": "promise"
+        },
+        {
+          "key": "d",
+          "text": "have been promising"
+        }
+      ],
+      "correctAnswer": "c",
+      "explanation": "Promise is used in the present simple as a performative: saying it makes the promise.",
+      "whyOthersAreIncorrect": "am promising: not the usual affirmative performative form; promises: wrong with I; have been promising: suggests repeated promises.",
+      "tip": "I promise to look into it."
+    },
+    {
+      "id": 22,
+      "question": "I ______ that I was completely wrong about the dates in my last email.",
+      "options": [
+        {
+          "key": "a",
+          "text": "am admitting"
+        },
+        {
+          "key": "b",
+          "text": "admits"
+        },
+        {
+          "key": "c",
+          "text": "have been admitting"
+        },
+        {
+          "key": "d",
+          "text": "admit"
+        }
+      ],
+      "correctAnswer": "d",
+      "explanation": "Admit is used in the present simple to perform the act of acknowledging something.",
+      "whyOthersAreIncorrect": "am admitting: presents it as an ongoing process; admits: wrong with I; have been admitting: suggests repeated admissions.",
+      "tip": "I admit I was wrong."
+    },
+    {
+      "id": 23,
+      "question": "On behalf of the committee, we ______ you for all your help with the conference.",
+      "options": [
+        {
+          "key": "a",
+          "text": "thank"
+        },
+        {
+          "key": "b",
+          "text": "are thanking"
+        },
+        {
+          "key": "c",
+          "text": "thanks"
+        },
+        {
+          "key": "d",
+          "text": "have been thanking"
+        }
+      ],
+      "correctAnswer": "a",
+      "explanation": "The present simple is the standard formal performative for expressing thanks.",
+      "whyOthersAreIncorrect": "are thanking: unnatural for this formal statement; thanks: wrong with we; have been thanking: suggests repeated action.",
+      "tip": "Thank somebody for something."
+    },
+    {
+      "id": 24,
+      "question": "We ______ receipt of your application and will respond within ten working days.",
+      "options": [
+        {
+          "key": "a",
+          "text": "are acknowledging"
+        },
+        {
+          "key": "b",
+          "text": "acknowledge"
+        },
+        {
+          "key": "c",
+          "text": "acknowledges"
+        },
+        {
+          "key": "d",
+          "text": "have been acknowledging"
+        }
+      ],
+      "correctAnswer": "b",
+      "explanation": "Acknowledge receipt is a fixed formal expression confirming that something has been received.",
+      "whyOthersAreIncorrect": "are acknowledging: less suitable for the formal performative; acknowledges: wrong with we; have been acknowledging: suggests repetition.",
+      "tip": "We acknowledge receipt of..."
+    },
+    {
+      "id": 25,
+      "question": "I ______ to sign anything that I haven't had time to read properly.",
+      "options": [
+        {
+          "key": "a",
+          "text": "am refusing"
+        },
+        {
+          "key": "b",
+          "text": "refuses"
+        },
+        {
+          "key": "c",
+          "text": "refuse"
+        },
+        {
+          "key": "d",
+          "text": "have been refusing"
+        }
+      ],
+      "correctAnswer": "c",
+      "explanation": "The present simple expresses a firm refusal in this statement.",
+      "whyOthersAreIncorrect": "am refusing: emphasizes an ongoing or temporary stance; refuses: wrong with I; have been refusing: suggests repeated refusals.",
+      "tip": "I refuse to sign it."
+    },
+    {
+      "id": 26,
+      "question": "School regulations ______ students to leave the premises before the final bell.",
+      "options": [
+        {
+          "key": "a",
+          "text": "are forbidding"
+        },
+        {
+          "key": "b",
+          "text": "forbids"
+        },
+        {
+          "key": "c",
+          "text": "have been forbidding"
+        },
+        {
+          "key": "d",
+          "text": "forbid"
+        }
+      ],
+      "correctAnswer": "d",
+      "explanation": "Forbid is used in the present simple to state a rule; regulations is plural.",
+      "whyOthersAreIncorrect": "are forbidding and have been forbidding: unsuitable continuous forms for a standing rule; forbids: wrong agreement.",
+      "tip": "Forbid somebody to do something."
+    },
+    {
+      "id": 27,
+      "question": "The report ______ that energy prices will rise sharply over the next decade.",
+      "options": [
+        {
+          "key": "a",
+          "text": "predicts"
+        },
+        {
+          "key": "b",
+          "text": "is predicting"
+        },
+        {
+          "key": "c",
+          "text": "predict"
+        },
+        {
+          "key": "d",
+          "text": "has been predicting"
+        }
+      ],
+      "correctAnswer": "a",
+      "explanation": "Predicts that is a standard present-simple reporting structure for a report's content.",
+      "whyOthersAreIncorrect": "is predicting and has been predicting: less natural for a statement of the report's conclusion; predict: wrong with the singular subject.",
+      "tip": "The report predicts / estimates / warns that..."
+    },
+    {
+      "id": 28,
+      "question": "Which sentence would NOT normally be used?",
+      "options": [
+        {
+          "key": "a",
+          "text": "I'm not promising anything at this stage."
+        },
+        {
+          "key": "b",
+          "text": "I'm promising to look into it."
+        },
+        {
+          "key": "c",
+          "text": "I don't promise anything at this stage."
+        },
+        {
+          "key": "d",
+          "text": "I promise to look into it personally."
+        }
+      ],
+      "correctAnswer": "b",
+      "explanation": "An affirmative performative promise is normally expressed with the present simple, not the present continuous.",
+      "whyOthersAreIncorrect": "The other options are possible: both simple and continuous can occur in negative promises; I promise is the standard affirmative performative.",
+      "tip": "Affirmative performative: I promise. Negative: I don't promise / I'm not promising."
+    },
+    {
+      "id": 29,
+      "question": "I ______ confess that our meeting had completely slipped my mind.",
+      "options": [
+        {
+          "key": "a",
+          "text": "am"
+        },
+        {
+          "key": "b",
+          "text": "will be"
+        },
+        {
+          "key": "c",
+          "text": "must"
+        },
+        {
+          "key": "d",
+          "text": "have been"
+        }
+      ],
+      "correctAnswer": "c",
+      "explanation": "Must is a modal verb followed by the base form confess. I must confess is a common expression introducing an admission.",
+      "whyOthersAreIncorrect": "am, will be, and have been cannot be followed by the bare infinitive confess in these structures.",
+      "tip": "Modal + base verb: must confess."
+    },
+    {
+      "id": 30,
+      "question": "The regulations ______ candidates to use a monolingual dictionary in this particular paper.",
+      "options": [
+        {
+          "key": "a",
+          "text": "are permitting"
+        },
+        {
+          "key": "b",
+          "text": "permits"
+        },
+        {
+          "key": "c",
+          "text": "have been permitting"
+        },
+        {
+          "key": "d",
+          "text": "permit"
+        }
+      ],
+      "correctAnswer": "d",
+      "explanation": "Permit is used in the present simple to state what the regulations allow; regulations is plural.",
+      "whyOthersAreIncorrect": "are permitting and have been permitting: unsuitable for a standing rule; permits: wrong agreement.",
+      "tip": "Permit somebody to do something; compare forbid somebody to do something."
+    }
+  ]
+}
