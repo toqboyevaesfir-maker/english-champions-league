@@ -24,6 +24,28 @@ footer{text-align:center;color:var(--muted);font-size:12px;padding:20px}
 
 .grammar-screen{display:none}.grammar-actions{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.grammar-actions button{flex:1;min-width:120px}.grammar-tiles{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0;min-height:48px}.grammar-tile{background:#eef2ff;color:#243b80;border:1px solid #cdd8ff;padding:10px 13px;border-radius:10px;font-weight:bold}.grammar-tile.selected{background:#e9f8f0;border-color:#16a36a;color:#126a48}.grammar-answer{background:#f5f7fb;border-radius:10px;padding:12px;margin:12px 0}.grammar-topic{display:block;width:100%;text-align:left;background:white;color:var(--ink);border:1px solid var(--line);margin:8px 0}.grammar-status{font-weight:bold;margin:12px 0;min-height:22px}.grammar-small{font-size:12px;color:var(--muted)}
 
+
+.unit-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-top:12px}
+.unit-card{background:#fff;color:var(--ink);border:1px solid var(--line);text-align:left;padding:12px;border-radius:12px}
+.unit-card small{display:block;color:var(--muted);font-weight:normal;margin-top:4px}
+.unit-card.available{border-color:#b8c8ff;background:#f8f9ff}
+.unit-screen{display:none}
+.unit-topics{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0}
+.unit-topic{background:#eef2ff;color:#243b80;border-radius:20px;padding:6px 10px;font-size:12px}
+.unit-option{display:block;width:100%;text-align:left;background:#fff;color:var(--ink);border:1px solid var(--line);margin:9px 0;font-weight:normal}
+.unit-option:disabled{opacity:1}
+.unit-option.correct{border-color:#16a36a;background:#e9f8f0;color:#126a48}
+.unit-option.wrong{border-color:#d64b4b;background:#fff0f0;color:#9d2525}
+.unit-explanation{background:#f5f7fb;border-radius:10px;padding:13px;margin:12px 0;line-height:1.5}
+.unit-explanation h3{font-size:15px;margin:0 0 6px}
+.unit-explanation p{margin:6px 0}
+@media(max-width:430px){.unit-list{grid-template-columns:1fr}}
+
+
+.revision-word{border:1px solid var(--line);border-radius:12px;padding:12px;margin:9px 0;background:#fff}
+.revision-word small{display:block;color:var(--muted);margin-top:5px}
+.revision-actions{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+.revision-actions button{flex:1;min-width:130px}
 </style></head>
 <body>
 <header><div class="wrap">
@@ -48,13 +70,23 @@ footer{text-align:center;color:var(--muted);font-size:12px;padding:20px}
 <p id="authMessage" class="muted" role="status" aria-live="polite"></p>
 </section>
 <section id="home">
+<div class="panel"><div class="row"><h2>Advanced Grammar</h2><span class="muted">101 Units</span></div><p class="muted">Exam-style grammar tests with explanations, feedback and tips.</p><button type="button" style="width:100%" onclick="openUnitTests()">Open Advanced Grammar</button></div>
+
 <div class="panel"><div class="row"><h2>Vocabulary Library</h2><span class="muted">5 levels · 125 words</span></div><div class="grid" id="levels"></div></div>
+<div class="panel"><h2>More Learning Sections</h2><p class="muted">Each library loads only the selected unit.</p><div class="grid">
+<button class="secondary" onclick="openLearningModule('vocabulary')">📖 Vocabulary · 101 Units</button>
+<button class="secondary" onclick="openLearningModule('collocations')">🧩 English Collocations · 60 Units</button>
+<button class="secondary" onclick="openLearningModule('thematic')">🗂 Thematic Vocabulary · 68 Units</button>
+<button class="secondary" onclick="openLearningModule('topics')">🌍 Different Topics · 40 Topics</button>
+<button class="secondary" onclick="openLearningModule('vocabularyBuilder')">📚 Vocabulary Builder · 100 Units</button>
+</div></div>
 <div class="panel"><h2>Learning Library</h2><div class="grid">
 <button class="secondary" onclick="openGrammar()">📘 Grammar</button>
 <button class="secondary" onclick="coming('Collocations')">🧩 Collocations</button>
 <button class="secondary" onclick="coming('Phrasal Verbs')">📚 Phrasal Verbs</button>
 <button class="secondary" onclick="coming('Writing Studio')">✍️ Writing Studio</button>
 </div><p class="muted">More learning sections will be added to this app.</p></div>
+<div class="panel"><div class="row"><h2>Revision Centre</h2><span class="muted">Smart review</span></div><p class="muted">Review mistakes and saved words from all learning sections.</p><button type="button" style="width:100%" onclick="openRevisionCentre()">🔁 Open Revision Centre</button></div>
 <div class="panel"><h2>Champions League</h2><p class="muted">New players begin in Bronze League. Shared online rankings will be added after Firebase is connected.</p><div>🥉 Bronze → 🥈 Silver → 🥇 Gold → 💎 Diamond → 👑 Legend</div></div>
 </section>
 <section id="quiz" class="panel">
@@ -84,8 +116,173 @@ footer{text-align:center;color:var(--muted);font-size:12px;padding:20px}
  <div id="grammarStatus" class="grammar-status"></div>
  <button id="grammarNext" style="display:none;width:100%" onclick="nextGrammarExercise()">Next</button>
 </section>
+
+<section id="unitHome" class="panel unit-screen">
+ <div class="row"><h2>Advanced Grammar</h2><button class="secondary" type="button" onclick="closeUnitTests()">Back</button></div>
+ <p class="muted">Choose an Advanced Grammar unit. Unit 1 is ready. Other units become available when their JSON files are added to the <b>units</b> folder.</p>
+ <div id="unitList" class="unit-list"></div>
+</section>
+<section id="unitOverview" class="panel unit-screen">
+ <div class="row"><h2 id="unitTitle">Unit 1</h2><button class="secondary" type="button" onclick="showUnitList()">All Units</button></div>
+ <p id="unitDescription" class="muted"></p><div id="unitTopics" class="unit-topics"></div>
+ <p id="unitQuestionTotal" class="muted"></p>
+ <button type="button" style="width:100%" onclick="startUnitQuiz()">Start Unit Test</button>
+</section>
+<section id="unitQuiz" class="panel unit-screen">
+ <div class="row"><h2 id="unitQuizTitle">Unit Test</h2><span class="muted" id="unitCount"></span></div>
+ <div class="progress"><div class="bar" id="unitBar"></div></div>
+ <p id="unitQuestion" style="font-weight:bold;line-height:1.5"></p>
+ <div id="unitOptions"></div>
+ <div id="unitFeedback" class="unit-explanation" style="display:none"></div>
+ <button id="unitNext" type="button" style="display:none;width:100%" onclick="nextUnitQuestion()">Next question</button>
+</section>
+<section id="unitResult" class="panel unit-screen">
+ <h2>Unit completed!</h2><h1 id="unitResultScore"></h1><p id="unitResultXP"></p><p id="unitResultMessage" class="muted"></p>
+ <button type="button" style="width:100%" onclick="showUnitList()">Back to Advanced Grammar</button>
+</section>
+<section id="learningModuleHome" class="panel unit-screen">
+ <div class="row"><h2 id="learningModuleTitle">Learning Library</h2><button class="secondary" type="button" onclick="closeLearningModule()">Back</button></div>
+ <p id="learningModuleDescription" class="muted"></p><div id="learningModuleUnits" class="unit-list"></div>
+</section>
+<section id="learningModuleOverview" class="panel unit-screen">
+ <div class="row"><h2 id="learningUnitTitle">Unit</h2><button class="secondary" type="button" onclick="showLearningModuleUnits()">All Units</button></div>
+ <p id="learningUnitDescription" class="muted"></p><div id="learningUnitTopics" class="unit-topics"></div><p id="learningUnitQuestionTotal" class="muted"></p>
+ <button id="learningStartButton" type="button" style="width:100%" onclick="startLearningModuleQuiz()">Start Practice</button>
+</section>
+<section id="learningModuleQuiz" class="panel unit-screen">
+ <div class="row"><h2 id="learningQuizTitle">Practice</h2><span class="muted" id="learningQuizCount"></span></div>
+ <div class="progress"><div id="learningQuizBar" class="bar"></div></div><p id="learningQuizQuestion" style="font-weight:bold;line-height:1.5"></p>
+ <div id="learningQuizOptions"></div><div id="learningQuizFeedback" class="unit-explanation" style="display:none"></div>
+ <button id="learningQuizNext" type="button" style="display:none;width:100%" onclick="nextLearningModuleQuestion()">Next question</button>
+</section>
+<section id="learningModuleResult" class="panel unit-screen">
+ <h2>Practice completed!</h2><h1 id="learningResultScore"></h1><p id="learningResultXP"></p><button type="button" style="width:100%" onclick="showLearningModuleUnits()">Back to Units</button>
+</section>
+<section id="revisionHome" class="panel unit-screen">
+ <div class="row"><h2>Revision Centre</h2><button class="secondary" type="button" onclick="closeRevisionCentre()">Back</button></div>
+ <p class="muted">Your mistakes and saved vocabulary from all sections are collected here.</p>
+ <div class="grid"><div class="level"><b id="revisionDueCount">0</b><small>Due today</small></div><div class="level"><b id="revisionTotalCount">0</b><small>Saved items</small></div></div>
+ <div class="revision-actions"><button type="button" onclick="startRevision('due')">Review due</button><button type="button" class="secondary" onclick="startRevision('all')">Repeat all saved</button></div>
+ <div class="row"><h3>My revision list</h3><button type="button" class="secondary" onclick="renderRevisionList()">Refresh</button></div>
+ <div id="revisionList"></div>
+</section>
+<section id="revisionQuiz" class="panel unit-screen">
+ <div class="row"><h2>Revision practice</h2><span class="muted" id="revisionCount"></span></div>
+ <div class="progress"><div class="bar" id="revisionBar"></div></div>
+ <p class="muted" id="revisionSource"></p><h2 id="revisionPrompt"></h2>
+ <div id="revisionOptions"></div><div id="revisionFeedback" class="unit-explanation" style="display:none"></div>
+ <button id="revisionNext" type="button" style="display:none;width:100%" onclick="nextRevisionItem()">Next</button>
+</section>
+<section id="revisionResult" class="panel unit-screen">
+ <h2>Revision completed!</h2><h1 id="revisionResultScore"></h1><p class="muted">Your next review dates have been updated.</p>
+ <button type="button" style="width:100%" onclick="openRevisionCentre()">Back to Revision Centre</button>
+</section>
 </main><footer>English Champions League · Keep learning!</footer>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script>
+// Modular learning libraries. Content is fetched only after a learner opens a unit.
+const ECL_MODULES={
+ vocabulary:{title:'Vocabulary',count:101,folder:'vocabulary',description:'Build vocabulary through unit-based practice.'},
+ collocations:{title:'English Collocations',count:60,folder:'collocations',description:'Learn natural word combinations and use them in context.'},
+ thematic:{title:'Thematic Vocabulary',count:68,folder:'thematic-vocabulary',description:'Learn vocabulary grouped by theme.'},
+ topics:{title:'Different Topics',count:40,folder:'different-topics',description:'Explore 40 different topics with focused practice.'},
+ vocabularyBuilder:{title:'Vocabulary Builder',count:100,folder:'vocabulary-builder',description:'Build and practise vocabulary through 100 focused units.'}
+};
+let eclActiveModule=null,eclActiveModuleData=null,eclModuleQuestionIndex=0,eclModuleScore=0,eclModuleAnswered=false;
+function hideLearningModuleScreens(){['learningModuleHome','learningModuleOverview','learningModuleQuiz','learningModuleResult'].forEach(id=>{const el=$(id);if(el)el.style.display='none';});}
+function openLearningModule(key){
+ if(!ECL_MODULES[key])return;eclActiveModule=key;hideUnitScreens();hideLearningModuleScreens();
+ $('home').style.display='none';$('quiz').style.display='none';$('result').style.display='none';hideGrammarScreens();
+ $('learningModuleTitle').textContent=ECL_MODULES[key].title;$('learningModuleDescription').textContent=ECL_MODULES[key].description;
+ $('learningModuleHome').style.display='block';renderLearningModuleUnits();
+}
+function closeLearningModule(){hideLearningModuleScreens();$('home').style.display='block';}
+function showLearningModuleUnits(){hideLearningModuleScreens();$('learningModuleHome').style.display='block';renderLearningModuleUnits();}
+function renderLearningModuleUnits(){
+ const root=$('learningModuleUnits');root.innerHTML='';const cfg=ECL_MODULES[eclActiveModule];
+ for(let n=1;n<=cfg.count;n++){const b=document.createElement('button');b.type='button';b.className='unit-card';b.innerHTML='<b>'+(eclActiveModule==='topics'?'Topic ':'Unit ')+n+'</b><small>Open to load content</small>';b.onclick=()=>loadLearningModuleUnit(n);root.appendChild(b);}
+}
+async function loadLearningModuleUnit(n){
+ const cfg=ECL_MODULES[eclActiveModule],root=$('learningModuleUnits');const status=document.createElement('p');status.className='muted';status.textContent='Loading…';root.prepend(status);
+ try{
+  const response=await fetch('learning/'+cfg.folder+'/unit'+n+'.json',{cache:'no-store'});if(!response.ok)throw new Error('missing');
+  const data=await response.json();if(!data||!Array.isArray(data.questions)||!data.questions.length)throw new Error('invalid');
+  eclActiveModuleData=data;$('learningUnitTitle').textContent=data.title||((eclActiveModule==='topics'?'Topic ':'Unit ')+n);
+  $('learningUnitDescription').textContent='Practice set · '+(data.variant||1);$('learningUnitTopics').innerHTML='';
+  (data.topics||[]).forEach(t=>{const span=document.createElement('span');span.className='unit-topic';span.textContent=t;$('learningUnitTopics').appendChild(span);});
+  $('learningUnitQuestionTotal').textContent=data.questions.length+' questions';
+  $('learningStartButton').textContent=eclActiveModule==='topics'?'Start Topic Practice':'Start Practice';hideLearningModuleScreens();$('learningModuleOverview').style.display='block';
+ }catch(err){status.textContent='This unit is not uploaded yet. Add learning/'+cfg.folder+'/unit'+n+'.json. Your other app sections are unchanged.';}
+}
+function startLearningModuleQuiz(){if(!eclActiveModuleData)return;eclModuleQuestionIndex=0;eclModuleScore=0;eclModuleAnswered=false;hideLearningModuleScreens();$('learningModuleQuiz').style.display='block';renderLearningModuleQuestion();}
+function renderLearningModuleQuestion(){
+ const q=eclActiveModuleData.questions[eclModuleQuestionIndex];eclModuleAnswered=false;$('learningQuizTitle').textContent=eclActiveModuleData.title||ECL_MODULES[eclActiveModule].title;
+ $('learningQuizCount').textContent='Question '+(eclModuleQuestionIndex+1)+' / '+eclActiveModuleData.questions.length;$('learningQuizBar').style.width=(eclModuleQuestionIndex/eclActiveModuleData.questions.length*100)+'%';
+ $('learningQuizQuestion').textContent=q.question;$('learningQuizFeedback').style.display='none';$('learningQuizNext').style.display='none';const root=$('learningQuizOptions');root.innerHTML='';
+ (q.options||[]).forEach(opt=>{const b=document.createElement('button');b.type='button';b.className='unit-option';b.textContent=opt.key+'. '+opt.text;b.onclick=()=>answerLearningModuleQuestion(opt.key,b);root.appendChild(b);});
+}
+function answerLearningModuleQuestion(key,btn){if(eclModuleAnswered)return;eclModuleAnswered=true;const q=eclActiveModuleData.questions[eclModuleQuestionIndex];const correct=String(q.correctAnswer).toLowerCase();
+ [...$('learningQuizOptions').children].forEach(b=>{b.disabled=true;if(b.textContent.trim().toLowerCase().startsWith(correct+'.'))b.classList.add('correct');});
+ if(String(key).toLowerCase()===correct){eclModuleScore++;const d=getData();d.total+=10;d.weekly+=10;saveData(d);}else{btn.classList.add('wrong');revisionCaptureQuestion({...q,options:q.options},key,q.options?.find(o=>String(o.key).toLowerCase()===correct)?.text||correct,(ECL_MODULES[eclActiveModule]?.title||'Learning')+' · Unit '+(eclActiveModuleData.unit||'?'));}
+ const feedback=$('learningQuizFeedback');feedback.innerHTML='';const h=document.createElement('h3');h.textContent=String(key).toLowerCase()===correct?'Correct!':'Not quite';feedback.appendChild(h);
+ const explanation=document.createElement('p');explanation.textContent=q.explanation||('Correct answer: '+correct.toUpperCase());feedback.appendChild(explanation);
+ if(Array.isArray(q.whyOthersAreIncorrect)&&q.whyOthersAreIncorrect.length){const p=document.createElement('p');p.textContent=q.whyOthersAreIncorrect.join(' ');feedback.appendChild(p);}
+ if(q.tip){const tip=document.createElement('p');tip.textContent='Tip: '+q.tip;feedback.appendChild(tip);}feedback.style.display='block';
+ $('learningQuizNext').textContent=eclModuleQuestionIndex===eclActiveModuleData.questions.length-1?'See Results':'Next Question';$('learningQuizNext').style.display='block';
+}
+function nextLearningModuleQuestion(){if(eclModuleQuestionIndex<eclActiveModuleData.questions.length-1){eclModuleQuestionIndex++;renderLearningModuleQuestion();}else{hideLearningModuleScreens();$('learningModuleResult').style.display='block';$('learningResultScore').textContent=eclModuleScore+' / '+eclActiveModuleData.questions.length;$('learningResultXP').textContent='You earned '+(eclModuleScore*10)+' XP.';$('learningQuizBar').style.width='100%';}}
+
+</script>
+<script>
+// Revision Centre: local-first spaced repetition, with optional per-player Firestore backup.
+let eclRevisionItems=[],eclRevisionQueue=[],eclRevisionIndex=0,eclRevisionCorrect=0,eclRevisionAnswered=false;
+const ECL_REVISION_INTERVALS=[1,3,7,14,30];
+function revisionStorageKey(){return 'ecl_revision_'+(eclCurrentUser&&eclCurrentUser.uid?eclCurrentUser.uid:'guest');}
+function loadRevisionItems(){try{const a=JSON.parse(localStorage.getItem(revisionStorageKey())||'[]');return Array.isArray(a)?a:[];}catch(e){return [];}}
+function saveRevisionItems(){localStorage.setItem(revisionStorageKey(),JSON.stringify(eclRevisionItems));syncRevisionToCloud();}
+function revisionToday(){const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
+function revisionAdd(item){
+ eclRevisionItems=loadRevisionItems();
+ const id=String(item.id||('rev_'+Date.now()+'_'+Math.random().toString(36).slice(2,8)));
+ const existing=eclRevisionItems.find(x=>x.id===id);
+ if(existing){existing.dueDate=revisionToday();existing.stage=0;existing.lastWrongAt=revisionToday();existing.wrongCount=(existing.wrongCount||0)+1;}
+ else eclRevisionItems.push({...item,id,stage:0,dueDate:revisionToday(),createdAt:revisionToday(),lastWrongAt:revisionToday(),wrongCount:1});
+ saveRevisionItems();
+}
+function revisionCaptureVocabulary(word,definition,chosen){revisionAdd({id:'bank_'+String(word).toLowerCase(),prompt:definition,correct:String(word),chosen:String(chosen),source:'Vocabulary Library',kind:'word',explanation:'Correct word: '+word});}
+function revisionCaptureQuestion(q,chosen,correct,source){
+ const label=(q.question||'').slice(0,90);const base=source+'_'+String(q.id??label).replace(/[^a-z0-9_-]/gi,'_');
+ revisionAdd({id:base,prompt:q.question||label,correct:String(correct),chosen:String(chosen),source,kind:'question',options:(q.options||[]).map(o=>({text:o.text,key:o.key})),explanation:q.explanation||'',tip:q.tip||'',why:q.whyOthersAreIncorrect||[]});
+}
+async function syncRevisionToCloud(){
+ try{if(!eclCurrentUser||!eclDb)return;const ref=eclDb.collection('users').doc(eclCurrentUser.uid).collection('revision').doc('items');
+ await ref.set({items:eclRevisionItems,updatedAt:firebase.firestore.FieldValue.serverTimestamp()},{merge:true});}
+ catch(e){console.warn('Revision cloud sync unavailable; local progress is preserved.',e);}
+}
+async function loadRevisionFromCloud(){
+ eclRevisionItems=loadRevisionItems();
+ try{if(eclCurrentUser&&eclDb){const snap=await eclDb.collection('users').doc(eclCurrentUser.uid).collection('revision').doc('items').get();if(snap.exists){const cloud=snap.data().items;if(Array.isArray(cloud)){const map=new Map(eclRevisionItems.map(x=>[x.id,x]));cloud.forEach(x=>map.set(x.id,{...map.get(x.id),...x}));eclRevisionItems=[...map.values()];localStorage.setItem(revisionStorageKey(),JSON.stringify(eclRevisionItems));}}}}
+ catch(e){console.warn('Could not load cloud revision data; using this device.',e);}
+}
+function revisionDue(item){return !item.dueDate||item.dueDate<=revisionToday();}
+function openRevisionCentre(){hideUnitScreens();hideLearningModuleScreens();hideGrammarScreens();$('home').style.display='none';$('quiz').style.display='none';$('result').style.display='none';$('revisionQuiz').style.display='none';$('revisionResult').style.display='none';$('revisionHome').style.display='block';eclRevisionItems=loadRevisionItems();loadRevisionFromCloud().then(renderRevisionList);renderRevisionList();}
+function closeRevisionCentre(){['revisionHome','revisionQuiz','revisionResult'].forEach(id=>$(id).style.display='none');$('home').style.display='block';}
+function renderRevisionList(){
+ eclRevisionItems=loadRevisionItems();const due=eclRevisionItems.filter(revisionDue);$('revisionDueCount').textContent=due.length;$('revisionTotalCount').textContent=eclRevisionItems.length;
+ const root=$('revisionList');root.innerHTML='';if(!eclRevisionItems.length){root.innerHTML='<p class="muted">No saved mistakes yet. When you make a mistake in a test, it will appear here automatically.</p>';return;}
+ [...eclRevisionItems].sort((a,b)=>(a.dueDate||'').localeCompare(b.dueDate||'')).forEach(item=>{const card=document.createElement('div');card.className='revision-word';const title=document.createElement('b');title.textContent=item.kind==='word'?item.correct:item.prompt;card.appendChild(title);const detail=document.createElement('small');detail.textContent=(item.source||'Learning')+' · '+(revisionDue(item)?'Due now':'Next review: '+item.dueDate)+' · Mistakes: '+(item.wrongCount||1);card.appendChild(detail);if(item.kind==='word'){const p=document.createElement('p');p.textContent=item.prompt;card.appendChild(p);}root.appendChild(card);});
+}
+function startRevision(mode){eclRevisionItems=loadRevisionItems();eclRevisionQueue=eclRevisionItems.filter(x=>mode==='all'||revisionDue(x));if(!eclRevisionQueue.length){alert(mode==='all'?'There are no saved items yet.':'There are no items due today.');return;}eclRevisionQueue.sort(()=>Math.random()-.5);eclRevisionIndex=0;eclRevisionCorrect=0;showRevisionItem();}
+function showRevisionItem(){const item=eclRevisionQueue[eclRevisionIndex];eclRevisionAnswered=false;$('revisionHome').style.display='none';$('revisionResult').style.display='none';$('revisionQuiz').style.display='block';$('revisionCount').textContent=(eclRevisionIndex+1)+' / '+eclRevisionQueue.length;$('revisionBar').style.width=(eclRevisionIndex/eclRevisionQueue.length*100)+'%';$('revisionSource').textContent=item.source||'Saved item';$('revisionPrompt').textContent=item.kind==='word'?item.prompt:item.prompt;
+ const root=$('revisionOptions');root.innerHTML='';$('revisionFeedback').style.display='none';$('revisionNext').style.display='none';
+ let opts=[];if(item.kind==='word'){const all=Object.values(BANK).flat().map(x=>x[0]);opts=[item.correct,...all.filter(x=>x!==item.correct).sort(()=>Math.random()-.5).slice(0,3)];}else{const qOpts=item.options;if(Array.isArray(qOpts)&&qOpts.length)opts=qOpts.map(o=>o.text);else opts=[item.correct,item.chosen,'Not sure','I need to review this'];}
+ opts=[...new Set(opts)].sort(()=>Math.random()-.5);opts.forEach((v,i)=>{const b=document.createElement('button');b.type='button';b.className='unit-option';b.textContent=String.fromCharCode(65+i)+'. '+v;b.onclick=()=>answerRevision(v,b);root.appendChild(b);});
+}
+function answerRevision(value,btn){if(eclRevisionAnswered)return;eclRevisionAnswered=true;const item=eclRevisionQueue[eclRevisionIndex],ok=String(value).trim().toLowerCase()===String(item.correct).trim().toLowerCase();[...$('revisionOptions').children].forEach(b=>{b.disabled=true;if(b.textContent.slice(3).trim().toLowerCase()===String(item.correct).trim().toLowerCase())b.classList.add('correct');});if(ok)eclRevisionCorrect++;else btn.classList.add('wrong');
+ const found=eclRevisionItems.find(x=>x.id===item.id);if(found){if(ok){found.stage=Math.min(5,(found.stage||0)+1);found.dueDate=new Date(Date.now()+ECL_REVISION_INTERVALS[found.stage-1]*86400000).toISOString().slice(0,10);found.lastCorrectAt=revisionToday();}else{found.stage=0;found.dueDate=revisionToday();found.wrongCount=(found.wrongCount||0)+1;found.lastWrongAt=revisionToday();}saveRevisionItems();}
+ const f=$('revisionFeedback');f.style.display='block';f.textContent=(ok?'Correct! ':'Not quite. Correct answer: '+item.correct+'. ')+(item.explanation||'')+(item.tip?' Tip: '+item.tip:'');$('revisionNext').textContent=eclRevisionIndex===eclRevisionQueue.length-1?'Finish':'Next';$('revisionNext').style.display='block';}
+function nextRevisionItem(){if(eclRevisionIndex<eclRevisionQueue.length-1){eclRevisionIndex++;showRevisionItem();}else{$('revisionQuiz').style.display='none';$('revisionResult').style.display='block';$('revisionResultScore').textContent=eclRevisionCorrect+' / '+eclRevisionQueue.length+' correct';$('revisionBar').style.width='100%';}}
+</script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 <script>
@@ -156,6 +353,7 @@ function authErrorText(error){
 }
 eclAuth.onAuthStateChanged(user=>{
   eclCurrentUser=user;
+  if(user){loadRevisionFromCloud().then(()=>{if($('revisionHome')&&$('revisionHome').style.display!=='none')renderRevisionList();});}
   const form=document.getElementById('authForm');
   const signed=document.getElementById('signedInPanel');
   const status=document.getElementById('authStatus');
@@ -174,7 +372,7 @@ function renderLevels(){let el=$("levels");Object.entries(BANK).forEach(([name,w
 let current=[],index=0,score=0,levelName="";
 function startTest(name){levelName=name;let words=[...BANK[name]].sort(()=>Math.random()-.5).slice(0,25);current=words;index=0;score=0;$("home").style.display="none";$("result").style.display="none";$("quiz").style.display="block";showQuestion()}
 function showQuestion(){let [word,def]=current[index];$("count").textContent="Question "+(index+1)+" / "+current.length;$("bar").style.width=(index/current.length*100)+"%";$("definition").textContent=def;$("feedback").style.display="none";$("next").style.display="none";let all=Object.values(BANK).flat().map(x=>x[0]);let distractors=all.filter(x=>x!==word).sort(()=>Math.random()-.5).slice(0,3);let opts=[word,...distractors].sort(()=>Math.random()-.5);let root=$("options");root.innerHTML="";opts.forEach((opt,i)=>{let b=document.createElement("button");b.className="option";b.textContent=String.fromCharCode(65+i)+". "+opt;b.onclick=()=>answer(opt,word,b);root.appendChild(b)})}
-function answer(choice,correct,btn){let buttons=[...$("options").children];buttons.forEach(b=>{b.disabled=true;if(b.textContent.slice(3)===correct)b.classList.add("correct")});if(choice===correct){score++;let d=getData();d.total+=10;d.weekly+=10;saveData(d)}else btn.classList.add("wrong");$("feedback").textContent="Correct word: "+correct;$("feedback").style.display="block";$("next").style.display="block";$("next").textContent=index===current.length-1?"See results":"Next question"}
+function answer(choice,correct,btn){let buttons=[...$("options").children];buttons.forEach(b=>{b.disabled=true;if(b.textContent.slice(3)===correct)b.classList.add("correct")});if(choice===correct){score++;let d=getData();d.total+=10;d.weekly+=10;saveData(d)}else{btn.classList.add("wrong");revisionCaptureVocabulary(correct,current[index][1],choice);}$("feedback").textContent="Correct word: "+correct;$("feedback").style.display="block";$("next").style.display="block";$("next").textContent=index===current.length-1?"See results":"Next question"}
 function nextQuestion(){index++;if(index<current.length)showQuestion();else finish()}
 function finish(){$("quiz").style.display="none";$("result").style.display="block";$("resultScore").textContent=score+" / 25";$("resultXP").textContent="You earned "+(score*10)+" XP."; $("bar").style.width="100%"}
 function goHome(){$("result").style.display="none";$("home").style.display="block";updateStats()}
@@ -201,4 +399,108 @@ function showGrammarAnswer(){const ex=grammarExercises[grammarIndex];grammarSele
 function nextGrammarExercise(){if(grammarIndex<grammarExercises.length-1){grammarIndex++;renderGrammarExercise();}else{showGrammarTopics();}}
 
 renderLevels();updateStats();
+
+
+// Unit Tests: Unit 1 is embedded; Units 2–101 load from /units/unitN.json.
+const ECL_UNIT1_DATA = {"unit":1,"variant":1,"title":"Unit 1 (Variant 1)","topics":["State verbs","Verbs with two meanings","Mental state verbs","Performatives"],"questionCount":30,"questions":[{"id":1,"question":"The steering committee _____ of nine specialists, three of whom are appointed by the department.","options":[{"key":"a","text":"consists"},{"key":"b","text":"is consisting"},{"key":"c","text":"consist"},{"key":"d","text":"has been consisting"}],"correctAnswer":"a","explanation":"Unit 1, Section A — State verbs. State verbs describe unchanging conditions rather than actions with a clear beginning and end, so they are not used in continuous tenses. Consist of belongs to the core group of state verbs (alongside believe, doubt, own) that never take the continuous form. The subject the steering committee is third-person singular, requiring -s.","whyOthersAreIncorrect":["is consisting — consist is not used in the present continuous.","consist — subject-verb agreement error (committee is singular).","has been consisting — continuous form, which violates the state verb rule."],"tip":"Memorise the contrast: The course consists of ten units. (NOT is consisting)."},{"id":2,"question":"Although she _____ a sizable property in the northern region, she has never actually resided there.","options":[{"key":"a","text":"is owning"},{"key":"b","text":"owns"},{"key":"c","text":"own"},{"key":"d","text":"has been owning"}],"correctAnswer":"b","explanation":"Unit 1, Section A. Own expresses a state of possession rather than an ongoing action, so it is not used in the continuous form. With the third-person singular subject she, the present simple form owns is required.","whyOthersAreIncorrect":["is owning — own is not used in the continuous form to express possession.","own — subject-verb agreement error.","has been owning — continuous form, not used with this verb."],"tip":"Unlike own, action verbs related to property (buy, rent, sell) can take the continuous: She is selling the house at the moment."},{"id":3,"question":"I seriously _____ whether the grant will be authorised before the end of the term.","options":[{"key":"a","text":"am doubting"},{"key":"b","text":"doubts"},{"key":"c","text":"doubt"},{"key":"d","text":"have been doubting"}],"correctAnswer":"c","explanation":"Unit 1, Section A. Doubt describes a mental state rather than an action in progress, so it takes the present simple. Seriously acts as an intensifier and does not affect the tense.","whyOthersAreIncorrect":["am doubting — doubt is not used in the continuous form.","doubts — subject-verb agreement error (subject is I).","have been doubting — continuous form, incorrect with this state verb."],"tip":"Compare I doubt whether he will come (state) with I am wondering whether he will come (wonder describes an active thinking process and can be continuous)."},{"id":4,"question":"Usually Madina stays in a guesthouse when she visits us, but this month she _____ with her relatives.","options":[{"key":"a","text":"stays"},{"key":"b","text":"stay"},{"key":"c","text":"is being stayed"},{"key":"d","text":"is staying"}],"correctAnswer":"d","explanation":"Unit 1, Section A — Temporary states. Certain verbs can be used in the continuous form to emphasise that a situation is temporary and applies around the present moment. The contrast between Usually ... stays (regular habit) and but this month (temporary arrangement) requires the present continuous.","whyOthersAreIncorrect":["stays — repeats the regular habit from the first clause, making but illogical.","stay — subject-verb agreement error.","is being stayed — passive form; stay is intransitive and cannot be used passively here."],"tip":"Compare: She stays in a guesthouse (permanent/regular) vs. She is staying with her relatives this month (temporary)."},{"id":5,"question":"The gallery _____ roughly two million guests a year, the vast majority of them from overseas.","options":[{"key":"a","text":"attracts"},{"key":"b","text":"is attracting"},{"key":"c","text":"attract"},{"key":"d","text":"has been attracting"}],"correctAnswer":"a","explanation":"Unit 1, Section A. Verbs like attract, like, look, love, sound only take the continuous when emphasising a temporary situation. Because roughly two million guests a year describes a permanent, recurring fact, the present simple is needed.","whyOthersAreIncorrect":["is attracting — would only fit with a temporary time marker such as this season or at the moment.","attract — subject-verb agreement error (the gallery is singular).","has been attracting — implies a duration stretching from the past up to now, which lacks context here."],"tip":"Compare: The gallery attracts two million guests a year (permanent) vs. The exhibition is attracting younger guests this season (temporary)."},{"id":6,"question":"Which sentence is NOT acceptable in standard English?","options":[{"key":"a","text":"The children are loving having their grandmother at home."},{"key":"b","text":"I'm owning two properties in the city centre."},{"key":"c","text":"She's staying with friends until the builders finish."},{"key":"d","text":"The collection consists of twelve early manuscripts."}],"correctAnswer":"b","explanation":"Unit 1, Section A. Own is a strict state verb that cannot be used in the continuous form. The standard form is I own two properties in the city centre.","whyOthersAreIncorrect":["The children are loving having their grandmother at home. — love can take the continuous to emphasise a temporary, limited period.","She's staying with friends until the builders finish. — temporary living arrangement, so continuous is natural.","The collection consists of twelve early manuscripts. — permanent composition, so present simple is correct."],"tip":"When spotting errors with state verbs, ask two questions: Is it a state or an action? Is it permanent or temporary?"},{"id":7,"question":"The statistics in the recent study _____ to be inconsistent with the ones we received last week.","options":[{"key":"a","text":"are appearing"},{"key":"b","text":"appears"},{"key":"c","text":"appear"},{"key":"d","text":"have been appearing"}],"correctAnswer":"c","explanation":"Unit 1, Section B — Verbs with two meanings. Some verbs take the present simple when expressing a state and the present continuous when expressing an action. Here, appear means seem (a state), and the structure appear to be always takes the simple form. The subject the statistics is plural, so appear is correct.","whyOthersAreIncorrect":["are appearing — only used when appear means perform/take part (e.g., on stage or TV).","appears — subject-verb agreement error (statistics is plural).","have been appearing — continuous form, does not fit the seem meaning."],"tip":"Compare: The statistics appear to be wrong (= seem) vs. She is appearing in a new musical (= taking part)."},{"id":8,"question":"Their modern complex _____ a terrace garden and a compact auditorium for public talks.","options":[{"key":"a","text":"is having"},{"key":"b","text":"have"},{"key":"c","text":"has been having"},{"key":"d","text":"has"}],"correctAnswer":"d","explanation":"Unit 1, Section B. Have is a state verb when it means possess/include, and an action verb in expressions like have lunch, have a shower, have a chat. Since the sentence describes permanent features of a building, the present simple is used. The subject their modern complex is singular.","whyOthersAreIncorrect":["is having — have is not used in the continuous for possession.","have — subject-verb agreement error (complex is singular).","has been having — continuous form, incompatible with possession."],"tip":"Compare: The complex has a terrace garden (possession = state) vs. We are having a meeting on the roof (activity = action)."},{"id":9,"question":"I'll have to ring you back in thirty minutes - we _____ supper with my relatives at the moment.","options":[{"key":"a","text":"are having"},{"key":"b","text":"have"},{"key":"c","text":"has"},{"key":"d","text":"have been having"}],"correctAnswer":"a","explanation":"Unit 1, Section B. Here, have means eat (an action), and at the moment indicates an activity in progress right now, requiring the present continuous.","whyOthersAreIncorrect":["have — implies a regular habit, which clashes with at the moment.","has — subject-verb agreement error (subject is we).","have been having — adds unnecessary emphasis on duration from the past."],"tip":"With have, always check the meaning first: possession (I have a car) vs. activity (I'm having supper)."},{"id":10,"question":"Fully equipped with its lens and power pack, the device _____ slightly under two kilograms.","options":[{"key":"a","text":"is weighing"},{"key":"b","text":"weighs"},{"key":"c","text":"weigh"},{"key":"d","text":"has been weighing"}],"correctAnswer":"b","explanation":"Unit 1, Section B. Weigh has two meanings: (1) have a certain weight (state) and (2) measure the weight of something (action). This sentence states a permanent physical measurement of the device, so the present simple is required.","whyOthersAreIncorrect":["is weighing — would only apply if someone were actively measuring it on a scale.","weigh — subject-verb agreement error (the device is singular).","has been weighing — implies an ongoing process, which makes no sense here."],"tip":"Compare: The box weighs five kilos (state) vs. The clerk is weighing the box (action)."},{"id":11,"question":"Could you hold on a second? The lab assistant _____ the specimens for you right now.","options":[{"key":"a","text":"weighs"},{"key":"b","text":"weigh"},{"key":"c","text":"is weighing"},{"key":"d","text":"has been weighing"}],"correctAnswer":"c","explanation":"Unit 1, Section B. Here, weigh means measure on a scale (an action in progress), confirmed by right now, so the present continuous is used.","whyOthersAreIncorrect":["weighs — implies a routine action, clashing with right now.","weigh — subject-verb agreement error.","has been weighing — implies a prolonged activity rather than a brief action happening right now."],"tip":"If you can replace the verb with 'is in the middle of doing X,' it is an action and can take the continuous."},{"id":12,"question":"I _____ precisely what you mean, although I still can't accept your conclusion.","options":[{"key":"a","text":"am seeing"},{"key":"b","text":"sees"},{"key":"c","text":"have been seeing"},{"key":"d","text":"see"}],"correctAnswer":"d","explanation":"Unit 1, Section B. See has multiple meanings: perceive visually (sense), understand (state), and meet/visit (action). Here, see means understand, which is a mental state and requires the present simple.","whyOthersAreIncorrect":["am seeing — only used when see means meet/have an appointment with.","sees — subject-verb agreement error (subject is I).","have been seeing — continuous form, not used for understand."],"tip":"Compare: I see what you mean (= understand) vs. I'm seeing my doctor tomorrow (= meeting)."},{"id":13,"question":"She won't be available at four - she _____ her advisor regarding the dissertation then.","options":[{"key":"a","text":"is seeing"},{"key":"b","text":"sees"},{"key":"c","text":"see"},{"key":"d","text":"has been seeing"}],"correctAnswer":"a","explanation":"Unit 1, Section B. Here, see means meet/consult, which is an action. For fixed personal arrangements in the near future, English uses the present continuous.","whyOthersAreIncorrect":["sees — used for fixed timetables/schedules rather than personal appointments.","see — subject-verb agreement error.","has been seeing — implies a long-term ongoing series of meetings or a romantic relationship."],"tip":"Use the present continuous for arranged future meetings: We're meeting at six."},{"id":14,"question":"Strangely enough, this latchkey _____ the back entrance but not the main gate.","options":[{"key":"a","text":"is fitting"},{"key":"b","text":"fits"},{"key":"c","text":"fit"},{"key":"d","text":"has been fitting"}],"correctAnswer":"b","explanation":"Unit 1, Section B. When fit means be the right size or shape, it describes a permanent state and takes the present simple.","whyOthersAreIncorrect":["is fitting — only used for the action of installing or putting something in place (e.g., They are fitting a new lock).","fit — subject-verb agreement error (this latchkey is singular).","has been fitting — implies a continuous action, which does not fit the context."],"tip":"Compare: This latchkey fits the entrance (state) vs. The locksmith is fitting a new lock (action)."},{"id":15,"question":"I _____ my choice to turn down that proposal more and more with every week that passes.","options":[{"key":"a","text":"regret"},{"key":"b","text":"regrets"},{"key":"c","text":"am regretting"},{"key":"d","text":"have been regretted"}],"correctAnswer":"c","explanation":"Unit 1, Section C — Mental state verbs. Verbs like find, realise, regret, think, understand can take the continuous form when we want to emphasise that a thought or feeling is developing, changing, or growing stronger. More and more with every week that passes highlights this gradual intensification.","whyOthersAreIncorrect":["regret — presents the regret as a static, unchanging state, clashing with more and more.","regrets — subject-verb agreement error (subject is I).","have been regretted — passive form, which is nonsensical here."],"tip":"Compare: I regret my choice (static fact) vs. I'm regretting my choice more and more (growing feeling)."},{"id":16,"question":"He _____ stepping down early at the moment, though nothing whatsoever has been decided yet.","options":[{"key":"a","text":"considers"},{"key":"b","text":"consider"},{"key":"c","text":"has been considered"},{"key":"d","text":"is considering"}],"correctAnswer":"d","explanation":"Unit 1, Section C. When consider means think carefully about, it describes an active mental process and is typically used in the present continuous, especially since nothing has been decided yet shows the process is still ongoing.","whyOthersAreIncorrect":["considers — points to a different meaning: have an opinion/regard as (e.g., I consider him a good teacher).","consider — subject-verb agreement error.","has been considered — passive form, which makes he the object of consideration rather than the thinker."],"tip":"Compare: He is considering stepping down early (= thinking about) vs. We consider this unacceptable (= believe/regard as)."},{"id":17,"question":"I _____ the solution perfectly well - it's printed at the foot of page 40.","options":[{"key":"a","text":"know"},{"key":"b","text":"am knowing"},{"key":"c","text":"knows"},{"key":"d","text":"have been knowing"}],"correctAnswer":"a","explanation":"Unit 1, Section C. Agree, believe, conclude, know, prefer form a group of mental state verbs that are almost never used in the continuous form. Knowledge is a state, not an action in progress.","whyOthersAreIncorrect":["am knowing — not used in standard English.","knows — subject-verb agreement error (subject is I).","have been knowing — know does not take continuous forms."],"tip":"Use the simple form for knowledge: I know the solution by heart."},{"id":18,"question":"Like most people of her era, she _____ herbal tea to coffee, especially in the evening.","options":[{"key":"a","text":"is preferring"},{"key":"b","text":"prefers"},{"key":"c","text":"prefer"},{"key":"d","text":"has been preferring"}],"correctAnswer":"b","explanation":"Unit 1, Section C. Prefer expresses a stable, ongoing preference (a mental state) and takes the present simple.","whyOthersAreIncorrect":["is preferring — prefer is not used in the continuous form.","prefer — subject-verb agreement error.","has been preferring — continuous form, incorrect with this verb."],"tip":"To express a temporary preference, use a different structure: I'd prefer tea today or I feel like tea today."},{"id":19,"question":"I _____ with virtually every single point of your report, which is rather rare for me.","options":[{"key":"a","text":"am agreeing"},{"key":"b","text":"agrees"},{"key":"c","text":"agree"},{"key":"d","text":"have been agreeing"}],"correctAnswer":"c","explanation":"Unit 1, Section C. Agree expresses a state of holding the same opinion, not an ongoing action, so the present simple is required.","whyOthersAreIncorrect":["am agreeing — rarely used (only in specific contexts like ongoing negotiations), unnatural here.","agrees — subject-verb agreement error (subject is I).","have been agreeing — adds unnecessary continuous duration."],"tip":"Always use the present simple for stating agreement: I completely agree with you."},{"id":20,"question":"Gradually, I _____ just how much effort this assignment is going to involve.","options":[{"key":"a","text":"realise"},{"key":"b","text":"realises"},{"key":"c","text":"have been realised"},{"key":"d","text":"am realising"}],"correctAnswer":"d","explanation":"Unit 1, Section C. Realise is a mental state verb, but in the continuous form it conveys the idea of gradually coming to understand something over time. The adverb Gradually directly triggers this usage.","whyOthersAreIncorrect":["realise — implies a sudden, single moment of insight, which clashes with Gradually.","realises — subject-verb agreement error (subject is I).","have been realised — passive form, which makes no sense here."],"tip":"Compare: I suddenly realise what happened (instant) vs. I'm gradually realising how complex this is (developing)."},{"id":21,"question":"I _____ that you leave your vehicle on the outskirts and catch the express bus into the centre.","options":[{"key":"a","text":"suggest"},{"key":"b","text":"am suggesting"},{"key":"c","text":"suggests"},{"key":"d","text":"have been suggesting"}],"correctAnswer":"a","explanation":"Unit 1, Section D — Performatives. Performative verbs perform the action they describe at the very moment they are spoken (saying 'I suggest...' is the act of making the suggestion). They are standardly used in the present simple.","whyOthersAreIncorrect":["am suggesting — describes the ongoing act of explaining an idea rather than performing a direct suggestion.","suggests — subject-verb agreement error (subject is I).","have been suggesting — implies repeated suggestions over time."],"tip":"Performatives are very common in formal writing, instructions, and official correspondence."},{"id":22,"question":"We _____ that all candidates review the terms and conditions thoroughly before signing.","options":[{"key":"a","text":"are recommending"},{"key":"b","text":"recommend"},{"key":"c","text":"recommends"},{"key":"d","text":"have been recommending"}],"correctAnswer":"b","explanation":"Unit 1, Section D. Recommend is a performative verb: stating 'We recommend...' carries out the recommendation directly. With we, the present simple is standard.","whyOthersAreIncorrect":["are recommending — loses the direct performative force.","recommends — subject-verb agreement error (subject is we).","have been recommending — implies a repeated action over a period of time."],"tip":"Note the subjunctive structure after recommend that: We recommend that all candidates review... (base form review, without -s even for singular subjects)."},{"id":23,"question":"We _____ advise travellers to arrive at least two hours prior to departure.","options":[{"key":"a","text":"are"},{"key":"b","text":"have been"},{"key":"c","text":"would"},{"key":"d","text":"will be"}],"correctAnswer":"c","explanation":"Unit 1, Section D — Modals with performatives. Adding a modal verb (would advise, must beg, can confirm) makes a performative statement sound more tentative, polite, or formal. Grammatically, only would can precede the bare infinitive advise.","whyOthersAreIncorrect":["are — are advise is ungrammatical (would require -ing or past participle).","have been — have been advise is ungrammatical.","will be — will be advise is ungrammatical."],"tip":"Compare: We advise travellers... (direct) vs. We would advise travellers... (more polite and formal)."},{"id":24,"question":"I _____ for the hold-up in replying to your letter of 14 March.","options":[{"key":"a","text":"am apologising"},{"key":"b","text":"apologises"},{"key":"c","text":"have been apologising"},{"key":"d","text":"apologise"}],"correctAnswer":"d","explanation":"Unit 1, Section D. Apologise is a performative verb: saying 'I apologise' constitutes the apology itself, so the present simple is used in formal correspondence.","whyOthersAreIncorrect":["am apologising — does not carry the standard formal performative force in affirmative sentences.","apologises — subject-verb agreement error (subject is I).","have been apologising — implies repeated apologies over time."],"tip":"While affirmative performatives take the simple form (I apologise), negative forms can use either simple or continuous with similar meaning: I don't apologise / I'm not apologising."},{"id":25,"question":"The supplier _____ that any defective part will be replaced at no charge to the buyer.","options":[{"key":"a","text":"guarantees"},{"key":"b","text":"is guaranteeing"},{"key":"c","text":"guarantee"},{"key":"d","text":"has been guaranteeing"}],"correctAnswer":"a","explanation":"Unit 1, Section D. Guarantee is a performative verb: the guarantee is issued through the statement itself. With the third-person singular subject the supplier, guarantees is required.","whyOthersAreIncorrect":["is guaranteeing — weakens the formal performative declaration.","guarantee — subject-verb agreement error.","has been guaranteeing — implies a repeated past-to-present action."],"tip":"Like apologise, deny, promise, and suggest, guarantee allows both simple and continuous forms in negative sentences."},{"id":26,"question":"Which sentence is NOT normally used?","options":[{"key":"a","text":"I don't deny signing the document."},{"key":"b","text":"I'm denying signing the document."},{"key":"c","text":"I'm not denying signing the document."},{"key":"d","text":"I deny signing the document."}],"correctAnswer":"b","explanation":"Unit 1, Section D — Affirmative vs. negative performatives. Verbs such as apologise, deny, guarantee, promise, and suggest can be used in either the present simple or present continuous in negative sentences with little difference in meaning. However, in affirmative sentences, the performative meaning requires the present simple (I deny...), making I'm denying... unnatural.","whyOthersAreIncorrect":["I don't deny signing the document. — negative sentence; present simple is standard.","I'm not denying signing the document. — negative sentence; present continuous is also accepted.","I deny signing the document. — standard affirmative performative."],"tip":"Remember the rule: Affirmative performative → simple only; Negative performative → simple or continuous."},{"id":27,"question":"I _____ beg you to keep this issue strictly between ourselves.","options":[{"key":"a","text":"am"},{"key":"b","text":"will be"},{"key":"c","text":"must"},{"key":"d","text":"have been"}],"correctAnswer":"c","explanation":"Unit 1, Section D — Modals with performatives. Pairing a modal with beg makes the plea more emphatic and formal. Grammatically, must is the only option that pairs with the bare infinitive beg.","whyOthersAreIncorrect":["am — am beg is ungrammatical.","will be — will be beg is ungrammatical.","have been — have been beg is ungrammatical."],"tip":"Compare: I beg you... (direct) vs. I must beg you... (more urgent and formal)."},{"id":28,"question":"I _____ this conference open and wish the hosts every success.","options":[{"key":"a","text":"am declaring"},{"key":"b","text":"declares"},{"key":"c","text":"have been declaring"},{"key":"d","text":"declare"}],"correctAnswer":"d","explanation":"Unit 1, Section D. Declare is a classic ceremonial/official performative verb (used at openings, in courts, or on customs forms). The conference becomes open at the moment the words are spoken, requiring the present simple.","whyOthersAreIncorrect":["am declaring — turns a ceremonial declaration into an ongoing process, removing its performative force.","declares — subject-verb agreement error (subject is I).","have been declaring — implies a repeated action."],"tip":"Fixed ceremonial phrases (I declare this meeting/conference open, I pronounce you...) always use the present simple."},{"id":29,"question":"I _____ that all mobile devices be switched off throughout the duration of the exam.","options":[{"key":"a","text":"request"},{"key":"b","text":"am requesting"},{"key":"c","text":"requests"},{"key":"d","text":"have been requesting"}],"correctAnswer":"a","explanation":"Unit 1, Section D. Request is a formal performative verb: the request is made by uttering the sentence, so the present simple is standard.","whyOthersAreIncorrect":["am requesting — undermines the direct, authoritative tone of a formal instruction.","requests — subject-verb agreement error (subject is I).","have been requesting — implies repeated requests over time."],"tip":"Notice the formal subjunctive be switched off after request that — a classic C1-level structure."},{"id":30,"question":"On behalf of the whole faculty, we _____ you on an exceptional set of grades.","options":[{"key":"a","text":"are congratulating"},{"key":"b","text":"congratulate"},{"key":"c","text":"congratulates"},{"key":"d","text":"have been congratulating"}],"correctAnswer":"b","explanation":"Unit 1, Section D. Congratulate is a performative verb used to offer congratulations directly at the moment of speaking/writing, requiring the present simple.","whyOthersAreIncorrect":["are congratulating — unnatural for a direct formal congratulation.","congratulates — subject-verb agreement error (subject is we).","have been congratulating — implies a repeated action over time."],"tip":"Pay attention to the dependent preposition: congratulate someone on something."}]};
+let eclCurrentUnit = null, eclUnitIndex = 0, eclUnitScore = 0, eclUnitAnswered = false;
+function hideUnitScreens(){
+  ['unitHome','unitOverview','unitQuiz','unitResult'].forEach(id=>{const el=$(id);if(el)el.style.display='none';});
+}
+function openUnitTests(){
+  $('home').style.display='none';$('quiz').style.display='none';$('result').style.display='none';
+  hideGrammarScreens();hideUnitScreens();$('unitHome').style.display='block';renderUnitList();
+}
+function closeUnitTests(){hideUnitScreens();$('home').style.display='block';}
+function showUnitList(){hideUnitScreens();$('unitHome').style.display='block';renderUnitList();}
+function renderUnitList(){
+  const root=$('unitList');root.innerHTML='';
+  for(let n=1;n<=101;n++){
+    const b=document.createElement('button');b.type='button';b.className='unit-card'+(n===1?' available':'');
+    b.innerHTML='<b>Unit '+n+'</b><small>'+(n===1?'30 questions · Ready':'JSON file required')+'</small>';
+    b.onclick=()=>loadEclUnit(n);root.appendChild(b);
+  }
+}
+async function loadEclUnit(n){
+  hideUnitScreens();$('unitHome').style.display='block';
+  const list=$('unitList');const status=document.createElement('p');status.className='muted';status.textContent='Loading Unit '+n+'…';list.prepend(status);
+  try{
+    let data;
+    if(n===1)data=ECL_UNIT1_DATA;
+    else{
+      const response=await fetch('units/unit'+n+'.json',{cache:'no-store'});
+      if(!response.ok)throw new Error('not-found');
+      data=await response.json();
+    }
+    if(!data||!Array.isArray(data.questions)||!data.questions.length)throw new Error('invalid');
+    eclCurrentUnit=data;
+    $('unitTitle').textContent=data.title||('Unit '+n);
+    $('unitDescription').textContent='Variant '+(data.variant||1)+' · Exam-style practice';
+    $('unitTopics').innerHTML='';
+    (data.topics||[]).forEach(t=>{const span=document.createElement('span');span.className='unit-topic';span.textContent=t;$('unitTopics').appendChild(span);});
+    $('unitQuestionTotal').textContent=(data.questions.length)+' questions';
+    hideUnitScreens();$('unitOverview').style.display='block';
+  }catch(err){
+    status.textContent=n===1?'Unit 1 could not be loaded. Please refresh the page.':'Unit '+n+' is not uploaded yet. Add its file as units/unit'+n+'.json.';
+  }
+}
+function startUnitQuiz(){
+  if(!eclCurrentUnit)return;
+  eclUnitIndex=0;eclUnitScore=0;eclUnitAnswered=false;
+  hideUnitScreens();$('unitQuiz').style.display='block';renderEclUnitQuestion();
+}
+function renderEclUnitQuestion(){
+  const q=eclCurrentUnit.questions[eclUnitIndex];eclUnitAnswered=false;
+  $('unitQuizTitle').textContent=eclCurrentUnit.title||('Unit '+eclCurrentUnit.unit);
+  $('unitCount').textContent='Question '+(eclUnitIndex+1)+' / '+eclCurrentUnit.questions.length;
+  $('unitBar').style.width=(eclUnitIndex/eclCurrentUnit.questions.length*100)+'%';
+  $('unitQuestion').textContent=q.question;
+  $('unitFeedback').style.display='none';$('unitFeedback').innerHTML='';
+  $('unitNext').style.display='none';
+  const root=$('unitOptions');root.innerHTML='';
+  q.options.forEach(opt=>{
+    const b=document.createElement('button');b.type='button';b.className='unit-option';
+    b.textContent=opt.key.toUpperCase()+'. '+opt.text;
+    b.onclick=()=>answerEclUnit(opt.key,b);root.appendChild(b);
+  });
+}
+function answerEclUnit(key,button){
+  if(eclUnitAnswered)return;eclUnitAnswered=true;
+  const q=eclCurrentUnit.questions[eclUnitIndex],correct=String(q.correctAnswer).toLowerCase();
+  const buttons=[...$('unitOptions').querySelectorAll('button')];
+  buttons.forEach((b,i)=>{
+    b.disabled=true;
+    const opt=q.options[i];
+    if(String(opt.key).toLowerCase()===correct)b.classList.add('correct');
+  });
+  const isCorrect=String(key).toLowerCase()===correct;
+  if(isCorrect)eclUnitScore++;
+  else{button.classList.add('wrong');revisionCaptureQuestion(q,key,q.options.find(o=>String(o.key).toLowerCase()===correct)?.text||correct,'Grammar · Unit '+(eclCurrentUnit.unit||1));}
+  const feedback=$('unitFeedback');feedback.style.display='block';
+  const title=document.createElement('h3');title.textContent=isCorrect?'Correct!':'Not quite — the correct answer is '+correct.toUpperCase()+'.';feedback.appendChild(title);
+  const explanation=document.createElement('p');explanation.textContent=q.explanation||'';feedback.appendChild(explanation);
+  if(Array.isArray(q.whyOthersAreIncorrect)&&q.whyOthersAreIncorrect.length){
+    const sub=document.createElement('h3');sub.textContent='Why the other options are incorrect';feedback.appendChild(sub);
+    const ul=document.createElement('ul');q.whyOthersAreIncorrect.forEach(item=>{const li=document.createElement('li');li.textContent=item;ul.appendChild(li);});feedback.appendChild(ul);
+  }
+  if(q.tip){const tip=document.createElement('p');tip.innerHTML='<b>Tip:</b> ';tip.appendChild(document.createTextNode(q.tip));feedback.appendChild(tip);}
+  $('unitNext').textContent=eclUnitIndex===eclCurrentUnit.questions.length-1?'See results':'Next question';
+  $('unitNext').style.display='block';
+}
+function nextUnitQuestion(){
+  if(eclUnitIndex<eclCurrentUnit.questions.length-1){eclUnitIndex++;renderEclUnitQuestion();}
+  else finishEclUnit();
+}
+function finishEclUnit(){
+  hideUnitScreens();$('unitResult').style.display='block';
+  const total=eclCurrentUnit.questions.length,percent=Math.round(eclUnitScore/total*100);
+  $('unitResultScore').textContent=eclUnitScore+' / '+total+' ('+percent+'%)';
+  const earnedKey='ecl_unit_completed_'+(eclCurrentUnit.unit||1);
+  let xp=0;
+  try{if(localStorage.getItem(earnedKey)!=='1'){xp=eclUnitScore*10;localStorage.setItem(earnedKey,'1');const d=getData();d.total+=xp;d.weekly+=xp;saveData(d);}}catch(e){}
+  $('unitResultXP').textContent=xp?'+'+xp+' XP earned':'XP for this unit was already awarded on a previous attempt.';
+  $('unitResultMessage').textContent=percent>=80?'Excellent work!':percent>=60?'Good effort. Review the explanations and try again.':'Keep practising. Read the explanations and tips, then try again.';
+  updateStats();
+}
+
 </script></body></html>
