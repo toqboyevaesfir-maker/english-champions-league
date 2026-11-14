@@ -1,2 +1,5 @@
-GRAMMAR
-Place Grammar Units 2–101 here as unit2.json through unit101.json. Grammar Unit 1 remains in the existing app.
+English Collocations
+Total: 60 Units.
+Upload each content file as learning/collocations/unit1.json, learning/collocations/unit2.json, and so on.
+Use the format in UNIT_JSON_TEMPLATE.json.
+The app loads only the selected unit JSON.
