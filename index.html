@@ -40,6 +40,37 @@ footer{text-align:center;color:var(--muted);font-size:12px;padding:20px}
 .unit-explanation{background:#f5f7fb;border-radius:10px;padding:13px;margin:12px 0;line-height:1.5}
 .unit-explanation h3{font-size:15px;margin:0 0 6px}
 
+/* Advanced Grammar: high-contrast answer choices */
+#unitQuiz .unit-option,
+#unitQuiz .unit-option:focus,
+#unitQuiz .unit-option:active {
+  background: #ffffff !important;
+  color: #172033 !important;
+  border: 1px solid #cbd5e1 !important;
+  opacity: 1 !important;
+}
+#unitQuiz .unit-option.correct {
+  background: #e9f8f0 !important;
+  color: #126a48 !important;
+  border: 2px solid #16a36a !important;
+}
+#unitQuiz .unit-option.wrong {
+  background: #fff0f0 !important;
+  color: #9d2525 !important;
+  border: 2px solid #d64b4b !important;
+}
+#unitQuiz .unit-explanation {
+  background: #ffffff !important;
+  color: #172033 !important;
+  border: 1px solid #d7dee8;
+}
+#unitQuiz .unit-explanation h3,
+#unitQuiz .unit-explanation p,
+#unitQuiz .unit-explanation li {
+  color: #172033 !important;
+}
+
+
 .vocab-preview-list{display:grid;gap:9px;margin:14px 0}.vocab-preview-item{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px;border:1px solid var(--line);border-radius:12px;background:#fff}.vocab-preview-word{font-weight:700;font-size:17px}.vocab-preview-explanation{font-size:13px;color:var(--muted);line-height:1.45;margin-top:4px}.vocab-preview-actions{display:flex;gap:8px;flex-wrap:wrap}.vocab-preview-actions button{padding:10px 12px}.vocab-preview-item button{white-space:nowrap}
 .unit-explanation p{margin:6px 0}.quiz-timer{padding:7px 9px;border:1px solid var(--line);border-radius:9px;background:#fff;color:var(--ink)}
 @media(max-width:430px){.unit-list{grid-template-columns:1fr}}
@@ -270,17 +301,8 @@ pre,code{background:#343831!important;color:#eee8d9!important;border-color:#5960
 <div class="panel"><div class="row"><h2>5. Advanced Grammar</h2><span class="muted">101 Units</span></div><p class="muted">Advanced grammar practice with explanations, feedback and tips.</p><button onclick="openUnitTests()" style="width:100%" type="button">Advanced Grammar</button></div>
 <div class="panel" style="margin-top:20px"><h2>More Learning Sections</h2><p class="muted">Develop all four English skills and plan your lessons.</p></div>
 <div class="panel" style="border:2px solid #d9e2ff;background:linear-gradient(135deg,#f7f9ff,#fff)"><div class="row"><h2>6. Speaking Studio</h2><span class="muted">100 speaking topics + description practice</span></div><p class="muted">Practise speaking topics and describe maps, pictures, people, places, buildings, events and objects.</p><button onclick="openSpeakingHub()" style="width:100%" type="button">Speaking Studio</button></div>
-<div class="panel" style="border:2px solid #d9e2ff;background:linear-gradient(135deg,#f7f9ff,#fff)"><div class="row"><h2>7. Real-Life English</h2><span class="muted">Listen · Speak · Write</span></div><p class="muted">Practise numbers, phone numbers, names, street names, dictation and speaking.</p><button class="secondary" onclick="openRealLifeEnglish()" style="width:100%" type="button">Real-Life English</button></div>
-<div class="panel"><div class="row"><h2>8. Reading</h2><span class="muted">7 levels · 490 Units</span></div><p class="muted">Choose a level and practise with Reading materials.</p><button onclick="openReadingLibrary()" style="width:100%" type="button">Reading</button></div>
-<div class="panel"><h2>9. Writing</h2><p class="muted">Choose Easy, Guided or Advanced Writing and practise structured written answers.</p><button class="secondary" onclick="openWritingLibrary()" style="width:100%">Writing</button></div>
-<div class="panel" style="border:2px solid #d9e2ff;background:linear-gradient(135deg,#f7f9ff,#fff)"><div class="row"><h2>10. Teacher’s Planner</h2><span class="muted">For teachers</span></div><p class="muted">Plan your school year, create detailed lessons and run interactive classroom activities.</p><button onclick="openTeacherPlanner()" style="width:100%" type="button">Teacher’s Planner</button></div>
-<div class="panel"><h2>Additional Learning Tools</h2><div class="grid"><button class="secondary" onclick="openLearningModule('vocabulary')">Vocabulary Library · 101 Units</button><button class="secondary" onclick="openLearningModule('collocations')">English Collocations · 60 Units</button><button class="secondary" onclick="openLearningModule('thematic')">Thematic Vocabulary · 68 Units</button><button class="secondary" onclick="openLearningModule('topics')">Different Topics · 40 Topics</button><button class="secondary" onclick="openLearningModule('vocabularyBuilder')">Vocabulary Builder · 100 Units</button><button class="secondary" onclick="openAISpeakingPartner()">AI Speaking Partner · Preview</button><button class="secondary" onclick="openCertificates()">My Certificates</button><button class="secondary" onclick="openRevisionCentre()">Revision Centre</button></div></div>
 <div class="panel telegram-panel"><div class="row"><div><h2>English Champions League on Telegram</h2><p class="muted">Updates, learning materials and announcements.</p></div></div><a class="telegram-button" href="https://t.me/EnglishChampionsLeague" rel="noopener noreferrer" target="_blank">Join Telegram Channel</a></div>
 <div class="panel"><h2>Champions League</h2><p class="muted">New players begin in Bronze League. Shared online rankings depend on Firebase connection.</p><div>🥉 Bronze → 🥈 Silver → 🥇 Gold → 💎 Diamond → 👑 Legend</div></div>
-</section>
-<section class="panel unit-screen" id="realLifeEnglishScreen" style="display:none">
-<div class="row"><h2>🌍 Real-Life English</h2><button class="secondary" onclick="closeRealLifeEnglish()" type="button">← Back</button></div>
-<div id="realLifeContent"></div>
 </section>
 <section class="panel unit-screen" id="aiSpeakingPartner" style="display:none"><div class="row"><h2>🤖 AI Speaking Partner</h2><button class="secondary" onclick="closeAISpeakingPartner()" type="button">Back</button></div><p><b>Practise speaking English through a natural conversation.</b></p><p class="muted">The planned partner will ask follow-up questions, listen to your answers, correct grammar and vocabulary, and explain mistakes in English, Russian or Uzbek.</p><div class="panel"><h3>Choose your practice</h3><label class="muted" for="aiPartnerTopic">Conversation topic</label><select class="writing-input" id="aiPartnerTopic"><option>Everyday life</option><option>Education</option><option>Health</option><option>Technology</option><option>Environment</option><option>Travel</option><option>Work and careers</option><option>Family and relationships</option></select><label class="muted" for="aiPartnerLevel">English level</label><select class="writing-input" id="aiPartnerLevel"><option>A1 · Beginner</option><option>A2 · Elementary</option><option>B1 · Intermediate</option><option>B2 · Upper-Intermediate</option><option>C1 · Advanced</option></select><label class="muted" for="aiPartnerExplain">Correction language</label><select class="writing-input" id="aiPartnerExplain"><option>English</option><option>Russian</option><option>Uzbek</option></select><p class="muted">AI voice service and student payment are not connected yet. This section is a preview; no payment will be taken.</p><button disabled="" style="width:100%;opacity:.65" type="button">AI conversation will be available after setup</button></div></section>
 <section class="panel unit-screen" id="certificatesScreen" style="display:none"><div class="row"><h2>🏅 My Certificates</h2><button class="secondary" onclick="closeCertificates()" type="button">Back</button></div><p class="muted">A Certificate of Achievement is issued for each supported test result of 80% or higher. Teacher: Esfir.</p><div id="certificateList"></div></section>
@@ -1359,7 +1381,9 @@ function renderEclUnitQuestion(){
   startQuestionClock('unitTimerDisplay',()=>answerEclUnit(null,null,true));
 }
 function answerEclUnit(key,button,timedOut=false){
-  if(eclUnitAnswered)return;eclUnitAnswered=true;stopQuestionClock();
+  if(eclUnitAnswered)return;
+  eclUnitAnswered=true;
+  stopQuestionClock();
   const q=eclCurrentUnit.questions[eclUnitIndex],correct=String(q.correctAnswer).toLowerCase();
   const buttons=[...$('unitOptions').querySelectorAll('button')];
   buttons.forEach((b,i)=>{
@@ -1371,16 +1395,56 @@ function answerEclUnit(key,button,timedOut=false){
   revisionCaptureQuestion(q,key??'No answer (time expired)',q.options.find(o=>String(o.key).toLowerCase()===correct)?.text||correct,'Grammar · Unit '+(eclCurrentUnit.unit||1),isCorrect);
   if(isCorrect)eclUnitScore++;
   else if(button){button.classList.add('wrong');}
-  const feedback=$('unitFeedback');feedback.style.display='block';
-  const title=document.createElement('h3');title.textContent=timedOut?'Time is up. Correct answer: '+correct.toUpperCase()+'.':(isCorrect?'Correct!':'Not quite — the correct answer is '+correct.toUpperCase()+'.');feedback.appendChild(title);
-  const explanation=document.createElement('p');explanation.textContent=q.explanation||'';feedback.appendChild(explanation);
-  if(Array.isArray(q.whyOthersAreIncorrect)&&q.whyOthersAreIncorrect.length){
-    const sub=document.createElement('h3');sub.textContent='Why the other options are incorrect';feedback.appendChild(sub);
-    const ul=document.createElement('ul');q.whyOthersAreIncorrect.forEach(item=>{const li=document.createElement('li');li.textContent=item;ul.appendChild(li);});feedback.appendChild(ul);
+
+  const feedback=$('unitFeedback');
+  feedback.style.display='block';
+  feedback.innerHTML='';
+  const title=document.createElement('h3');
+  title.textContent=timedOut?'Time is up. Correct answer: '+correct.toUpperCase()+'.':(isCorrect?'Correct!':'Not quite — the correct answer is '+correct.toUpperCase()+'.');
+  feedback.appendChild(title);
+
+  // Show a separate explanation for every answer choice (A, B, C and D).
+  const detailTitle=document.createElement('h3');
+  detailTitle.textContent='Explanation for each option';
+  feedback.appendChild(detailTitle);
+  const list=document.createElement('div');
+  list.className='unit-option-explanations';
+  const wrongExplanations=Array.isArray(q.whyOthersAreIncorrect)?q.whyOthersAreIncorrect:[];
+  let wrongIndex=0;
+  (q.options||[]).forEach(opt=>{
+    const optKey=String(opt.key||'').toLowerCase();
+    const isRight=optKey===correct;
+    let explanation='';
+    if(opt.explanation||opt.feedback||opt.reason){
+      explanation=opt.explanation||opt.feedback||opt.reason;
+    }else if(q.optionExplanations){
+      explanation=q.optionExplanations[opt.key]||q.optionExplanations[optKey]||'';
+    }else if(isRight){
+      explanation=q.explanation||q.meaning||'This is the correct answer for the grammatical rule tested in this sentence.';
+    }else{
+      explanation=wrongExplanations[wrongIndex]||'This option does not fit the grammatical structure required by the sentence.';
+      wrongIndex++;
+    }
+    const item=document.createElement('div');
+    item.className='unit-option-explanation'+(isRight?' is-correct':'');
+    const heading=document.createElement('b');
+    heading.textContent=String(opt.key).toUpperCase()+'. '+opt.text+(isRight?' — Correct answer':'');
+    const paragraph=document.createElement('p');
+    paragraph.textContent=explanation;
+    item.appendChild(heading);
+    item.appendChild(paragraph);
+    list.appendChild(item);
+  });
+  feedback.appendChild(list);
+
+  if(q.tip){
+    const tip=document.createElement('p');
+    tip.innerHTML='<b>Tip:</b> ';
+    tip.appendChild(document.createTextNode(q.tip));
+    feedback.appendChild(tip);
   }
-  if(q.tip){const tip=document.createElement('p');tip.innerHTML='<b>Tip:</b> ';tip.appendChild(document.createTextNode(q.tip));feedback.appendChild(tip);}
-  $('unitNext').style.display='none';
-  scheduleQuizAdvance(nextUnitQuestion,1700);
+  $('unitNext').textContent=eclUnitIndex<eclCurrentUnit.questions.length-1?'Next question':'Finish test';
+  $('unitNext').style.display='block';
 }
 function nextUnitQuestion(){
   stopQuestionClock();if(eclUnitIndex<eclCurrentUnit.questions.length-1){eclUnitIndex++;renderEclUnitQuestion();}
@@ -2621,4 +2685,10 @@ input::placeholder,textarea::placeholder{color:#555 !important;opacity:1}
 #teacherPlanner .panel{color:#111 !important}
 #teacherPlanner .muted{color:#333 !important}
 #teacherPlanner button{min-height:44px}
+
+#unitQuiz .unit-option-explanations{display:grid;gap:9px;margin-top:10px}
+#unitQuiz .unit-option-explanation{padding:10px 12px;border:1px solid #d7dee8;border-radius:9px;background:#fff;color:#172033}
+#unitQuiz .unit-option-explanation p{margin:5px 0 0;line-height:1.5;color:#273449}
+#unitQuiz .unit-option-explanation.is-correct{border:2px solid #16a36a;background:#f0fbf5}
+
 </style>
