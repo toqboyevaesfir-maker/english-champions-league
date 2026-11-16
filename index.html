@@ -265,7 +265,8 @@ pre,code{background:#343831!important;color:#eee8d9!important;border-color:#5960
 .unit-screen .unit-explanation strong{color:#000000!important}
 .unit-screen .unit-option:focus-visible{outline:3px solid #000!important;outline-offset:3px}
 
-</style><meta content="v36-soft-night-theme" name="ecl-version"/>
+.ecl-teacher-only{display:none!important}
+</style><meta content="v36-soft-night-theme-student" name="ecl-version"/>
 </head>
 <body>
 <header><div class="wrap">
@@ -306,7 +307,7 @@ pre,code{background:#343831!important;color:#eee8d9!important;border-color:#5960
 <div class="panel" style="border:2px solid #d9e2ff;background:linear-gradient(135deg,#f7f9ff,#fff)"><div class="row"><h2>6. Speaking Studio</h2><span class="muted">100 speaking topics + description practice</span></div><p class="muted">Practise speaking topics and describe maps, pictures, people, places, buildings, events and objects.</p><button onclick="openSpeakingHub()" style="width:100%" type="button">Speaking Studio</button></div><div class="panel" style="border:2px solid #d9e2ff;background:linear-gradient(135deg,#f7f9ff,#fff)"><div class="row"><h2>7. Real-Life English</h2><span class="muted">Listen · Speak · Write</span></div><p class="muted">Practise numbers, phone numbers, names, street names, dates, addresses, spelling, dictation and speaking.</p><button class="secondary" onclick="openRealLifeEnglish()" style="width:100%" type="button">Real-Life English</button></div>
 <div class="panel"><div class="row"><h2>8. Reading</h2><span class="muted">7 levels · 490 Units</span></div><p class="muted">Choose a level and practise with Reading materials.</p><button onclick="openReadingLibrary()" style="width:100%" type="button">Reading</button></div>
 <div class="panel"><h2>9. Writing</h2><p class="muted">Choose Easy, Guided or Advanced Writing and practise structured written answers.</p><button class="secondary" onclick="openWritingLibrary()" style="width:100%">Writing</button></div>
-<div class="panel" style="border:2px solid #d9e2ff;background:linear-gradient(135deg,#f7f9ff,#fff)"><div class="row"><h2>10. Teacher’s Planner</h2><span class="muted">For teachers</span></div><p class="muted">Plan your school year, create detailed lessons and run interactive classroom activities.</p><button onclick="openTeacherPlanner()" style="width:100%" type="button">Teacher’s Planner</button></div>
+<div class="panel" style="border:2px solid #d9e2ff;background:linear-gradient(135deg,#f7f9ff,#fff)"><div class="row"><h2>10. Teacher’s Planner</h2><span class="muted">For teachers and students</span></div><p class="muted">Plan your school year, create detailed lessons and run interactive classroom activities.</p><button onclick="openTeacherPlanner()" style="width:100%" type="button">Teacher’s Planner</button></div>
 <div class="panel"><h2>Additional Learning Tools</h2><div class="grid"><button class="secondary" onclick="openLearningModule('vocabulary')">Vocabulary Library · 101 Units</button><button class="secondary" onclick="openLearningModule('collocations')">English Collocations · 60 Units</button><button class="secondary" onclick="openLearningModule('thematic')">Thematic Vocabulary · 68 Units</button><button class="secondary" onclick="openLearningModule('topics')">Different Topics · 40 Topics</button><button class="secondary" onclick="openLearningModule('vocabularyBuilder')">Vocabulary Builder · 100 Units</button><button class="secondary" onclick="openAISpeakingPartner()">AI Speaking Partner · Preview</button><button class="secondary" onclick="openCertificates()">My Certificates</button><button class="secondary" onclick="openRevisionCentre()">Revision Centre</button></div></div>
 <div class="panel telegram-panel"><div class="row"><div><h2>English Champions League on Telegram</h2><p class="muted">Updates, learning materials and announcements.</p></div></div><a class="telegram-button" href="https://t.me/EnglishChampionsLeague" rel="noopener noreferrer" target="_blank">Join Telegram Channel</a></div>
 <div class="panel"><h2>Champions League</h2><p class="muted">New players begin in Bronze League. Shared online rankings depend on Firebase connection.</p><div>🥉 Bronze → 🥈 Silver → 🥇 Gold → 💎 Diamond → 👑 Legend</div></div>
@@ -336,7 +337,7 @@ pre,code{background:#343831!important;color:#eee8d9!important;border-color:#5960
 <div class="grid"><select class="writing-input" id="speakingLevelFilter" onchange="renderSpeakingUnits()"><option value="all">All levels · 100 units</option><option value="1">Level 1 · Maps &amp; locations</option><option value="2">Level 2 · Simple scenes</option><option value="3">Level 3 · Detailed pictures</option><option value="4">Level 4 · Compare pictures</option></select><select class="writing-input" id="speakingUnitSelect" onchange="openSpeakingUnit(Number(this.value))"></select></div>
 <div id="speakingUnitContent"></div>
 <div class="panel"><h3>Advanced Speaking Templates</h3><p class="muted">Longer, structured answers: describe, explain, speculate, compare, evaluate and support an opinion.</p><div id="speakingAdvancedTemplates"></div></div>
-<div class="grid"><label class="secondary" style="display:block;text-align:center;padding:10px;border:1px solid var(--line);border-radius:10px;cursor:pointer">Import Speaking JSON<input accept="application/json,.json" onchange="speakingImportJSON(event)" spellcheck="true" style="display:none" type="file"/></label></div>
+<div class="grid"><label class="secondary ecl-teacher-only" style="display:block;text-align:center;padding:10px;border:1px solid var(--line);border-radius:10px;cursor:pointer">Import Speaking JSON<input accept="application/json,.json" onchange="speakingImportJSON(event)" spellcheck="true" style="display:none" type="file"/></label></div>
 </section>
 <section class="panel unit-screen" id="pronunciationPanel" style="display:none">
 <div id="pronunciationContent"></div>
@@ -424,20 +425,17 @@ pre,code{background:#343831!important;color:#eee8d9!important;border-color:#5960
 </section>
 <section class="panel unit-screen" id="readingHome">
 <div class="row"><h2>Reading</h2><button class="secondary" onclick="closeReadingLibrary()" type="button">Back</button></div>
-<p class="muted">Choose one of seven CEFR levels. Each level has 70 Reading Extraction slots. Upload your own JSON files whenever you are ready.</p>
+<p class="muted">Choose one of seven CEFR levels and open an available Reading Unit.</p>
 <div class="grid" id="readingLevelList"></div>
 <p aria-live="polite" class="muted" id="readingLibraryStatus" role="status">Select a level to view its 70 units.</p>
-<div class="grid" style="margin-top:10px">
-<button class="secondary" onclick="backupReadingMaterials()" type="button">Back Up My Reading JSON</button>
-</div>
 <button class="secondary" onclick="openLegacyReadingArchive()" style="width:100%;margin-top:10px" type="button">Open existing Reading Archive · 200 slots</button>
-<p class="muted">This HTML contains the Reading structure and its built-in JSON format guide. You only need to keep this main HTML file for now. When you create Reading JSON units in the future, upload them here. Uploaded units are stored in this browser, so use the backup button if you want to keep copies of those materials.</p>
+<p class="muted">Choose a published Reading Unit to practise. Learning materials are provided by the teacher.</p>
 </section>
 <section class="panel unit-screen" id="readingLevelHome">
 <div class="row"><h2 id="readingLevelTitle">Reading · Beginner</h2><button class="secondary" onclick="openReadingLibrary()" type="button">All Levels</button></div>
-<p class="muted" id="readingLevelDescription">Upload a JSON file into any numbered unit slot.</p>
-<div class="row" style="flex-wrap:wrap;gap:8px"><button class="secondary" onclick="openSelectedLevelReading()" type="button">Open selected Unit</button><label class="muted" for="readingJsonUpload">Upload JSON to selected unit:</label><input accept=".json,application/json" id="readingJsonUpload" spellcheck="true" style="max-width:100%" type="file"/></div>
-<p aria-live="polite" class="muted" id="readingUploadStatus" role="status">Choose a unit slot, then select its JSON file.</p>
+<p class="muted" id="readingLevelDescription">Select an available Reading Unit to practise.</p>
+<div class="row" style="flex-wrap:wrap;gap:8px"><button class="secondary" onclick="openSelectedLevelReading()" type="button">Open selected Unit</button></div>
+<p aria-live="polite" class="muted" id="readingUploadStatus" role="status">Select an available Unit to begin.</p>
 <div class="unit-list" id="readingLevelUnits"></div>
 </section>
 <section class="panel unit-screen" id="readingArchive">
@@ -484,8 +482,7 @@ The checker area is prepared for future secure AI integration. It will show an E
 <div class="row"><h2 id="writingDetailTitle">Writing topic</h2><button class="secondary" onclick="backToWritingList()" type="button">Back to list</button></div>
 <p class="muted" id="writingDetailDescription"></p>
 <div class="writing-template" id="writingDetailTemplate"></div>
-<div class="writing-actions"><label class="writing-card" style="flex:1;min-width:170px">Upload JSON for this topic<input accept=".json,application/json" id="writingJsonUpload" spellcheck="true" style="display:block;width:100%;margin-top:8px" type="file"/></label></div>
-<p aria-live="polite" class="muted" id="writingUploadStatus" role="status">You can upload your own JSON template for this topic.</p>
+<p aria-live="polite" class="muted" id="writingUploadStatus" role="status">Use the writing template and complete your practice.</p>
 <div id="writingStudentArea"></div>
 </section>
 <section class="panel unit-screen" id="writingAdvanced">
@@ -540,8 +537,8 @@ The checker area is prepared for future secure AI integration. It will show an E
 <button class="secondary" onclick="showTeacherTab('xpstats')" type="button">📊 Individual Student XP Statistics</button>
 </div>
 <div id="teacherScheduleTab">
-<h2>Annual Teaching Schedule</h2><p class="muted">Upload a JSON schedule or add lessons manually. Your data stays in this browser unless you export it.</p>
-<div class="grid"><label class="secondary" style="display:block;text-align:center;padding:13px;border-radius:11px;cursor:pointer">Upload Schedule JSON<input accept=".json,application/json" id="teacherScheduleUpload" onchange="importTeacherSchedule(event)" spellcheck="true" style="display:none" type="file"/></label></div>
+<h2>Annual Teaching Schedule</h2><p class="muted">Add lessons manually. Your teaching plan is saved in this browser.</p>
+<div class="grid"><label class="secondary ecl-teacher-only" style="display:block;text-align:center;padding:13px;border-radius:11px;cursor:pointer">Upload Schedule JSON<input accept=".json,application/json" id="teacherScheduleUpload" onchange="importTeacherSchedule(event)" spellcheck="true" style="display:none" type="file"/></label></div>
 <div class="panel" style="background:#f8f9fc">
 <h3 style="margin-top:0">Add to timetable</h3>
 <div class="grid"><input aria-label="Date" class="writing-input" id="tsDate" spellcheck="true" type="date"/><input aria-label="Start time" class="writing-input" id="tsTime" spellcheck="true" type="time"/></div>
@@ -565,7 +562,7 @@ The checker area is prepared for future secure AI integration. It will show an E
 <div class="grid"><button class="secondary" onclick="addTeacherStage()" type="button">+ Add Stage</button><button onclick="saveTeacherLesson()" type="button">Save Lesson Plan</button></div>
 <p aria-live="polite" class="muted" id="teacherCreateStatus" role="status"></p>
 </div>
-<div id="teacherSavedTab" style="display:none"><div class="row"><h2>Saved Lesson Plans</h2></div><label class="secondary" style="display:block;text-align:center;padding:12px;border-radius:11px;cursor:pointer;margin:10px 0">Import Lesson JSON<input accept=".json,application/json" id="teacherLessonUpload" onchange="importTeacherLessons(event)" spellcheck="true" style="display:none" type="file"/></label><div class="muted" id="teacherSavedList">No saved lesson plans yet.</div></div>
+<div id="teacherSavedTab" style="display:none"><div class="row"><h2>Saved Lesson Plans</h2></div><label class="secondary ecl-teacher-only" style="display:block;text-align:center;padding:12px;border-radius:11px;cursor:pointer;margin:10px 0">Import Lesson JSON<input accept=".json,application/json" id="teacherLessonUpload" onchange="importTeacherLessons(event)" spellcheck="true" style="display:none" type="file"/></label><div class="muted" id="teacherSavedList">No saved lesson plans yet.</div></div>
 <div id="teacherObservationTab" style="display:none">
 <div class="row"><h2>📝 Lesson Observation &amp; Analysis</h2><button class="secondary" onclick="teacherRenderObservations()">Saved Reports</button></div>
 <p class="muted">Observe a colleague’s lesson, record evidence, rate each area and create a Word report. This is a professional-development observation tool, not an official teacher attestation decision.</p>
@@ -665,8 +662,8 @@ The checker area is prepared for future secure AI integration. It will show an E
 <div class="grid"><label>Date<input class="writing-input" id="regDate" spellcheck="true" type="date"/></label><label>Class<select class="writing-input" id="regClass" onchange="eclRegisterLoad()"><option value="">Choose a saved class</option></select></label></div>
 <div class="grid"><button onclick="eclRegisterLoad()" type="button">Load register</button><button onclick="eclRegisterSave()" type="button">💾 Save register</button></div>
 <p aria-live="polite" class="muted" id="regStatus" role="status">Choose a date and class to begin.</p><div id="regStudentRows"></div>
-<div class="grid"><label class="secondary" style="display:block;text-align:center;padding:12px;border-radius:11px;cursor:pointer">Import register JSON<input accept=".json,application/json" onchange="eclRegisterImport(event)" spellcheck="true" style="display:none" type="file"/></label></div>
-<p class="muted">Records are stored in this browser on this device. Export JSON regularly. Clearing browser data may remove locally saved records.</p>
+<div class="grid"><label class="secondary ecl-teacher-only" style="display:block;text-align:center;padding:12px;border-radius:11px;cursor:pointer">Import register JSON<input accept=".json,application/json" onchange="eclRegisterImport(event)" spellcheck="true" style="display:none" type="file"/></label></div>
+<p class="muted">Your register records are stored in this browser on this device. Clearing browser data may remove locally saved records.</p>
 </div>
 <div id="teacherRankingTab" style="display:none">
 <h2>🏆 Student Performance Ranking</h2><p class="muted">Review attendance and homework. Absence is not automatically counted as missing homework.</p>
@@ -1047,11 +1044,11 @@ function openReadingLibrary(){
 function openReadingLevel(levelId){
  const level=ECL_READING_LEVELS.find(x=>x.id===levelId);if(!level)return;eclSelectedReadingLevel=levelId;eclSelectedReadingSlot=1;
  hideReadingScreens();$('readingLevelHome').style.display='block';$('readingLevelTitle').textContent='Reading · '+level.name+' ('+level.cefr+')';
- $('readingLevelDescription').textContent='70 units are available in this level. Upload your own JSON content into any slot.';
+ $('readingLevelDescription').textContent='Choose an available Reading Unit to practise.';
  const root=$('readingLevelUnits');root.innerHTML='';
  for(let n=1;n<=70;n++){let saved=false;try{saved=!!localStorage.getItem(readingLocalKey(levelId,n));}catch(e){}
   const b=document.createElement('button');b.type='button';b.className='unit-card'+(saved?' available':'');b.innerHTML='<b>Unit '+String(n).padStart(2,'0')+'</b><small>'+(saved?'JSON saved on this device':'Empty slot · JSON can be added')+'</small>';
-  b.onclick=()=>{eclSelectedReadingSlot=n;$('readingUploadStatus').textContent='Selected '+level.name+' · Unit '+n+'. Upload a JSON file, or tap Open selected Unit if content is saved.';};root.appendChild(b);
+  b.onclick=()=>{eclSelectedReadingSlot=n;$('readingUploadStatus').textContent='Selected '+level.name+' · Unit '+n+'. Tap Open selected Unit to continue.';};root.appendChild(b);
  }
  $('readingUploadStatus').textContent='Choose a unit slot, then select its JSON file.';
 }
@@ -1067,7 +1064,7 @@ function handleReadingJsonUpload(file){
 function openSelectedLevelReading(){loadLevelReading(eclSelectedReadingLevel,eclSelectedReadingSlot);}
 function loadLevelReading(levelId,slot){
  let data=null;try{const local=localStorage.getItem(readingLocalKey(levelId,slot));if(local)data=JSON.parse(local);}catch(e){}
- if(!data){$('readingUploadStatus').textContent='No JSON saved in this browser for this unit yet. Select the slot and upload a JSON file.';return;}
+ if(!data){$('readingUploadStatus').textContent='This Reading Unit is not available yet. Please check back later.';return;}
  eclCurrentReading=data;$('readingTitle').textContent=data.title||('Reading Unit '+slot);$('readingMeta').textContent=(data.level||ECL_READING_LEVELS.find(x=>x.id===levelId).cefr)+' · '+data.questions.length+' questions';$('readingDescription').textContent=data.description||'Reading practice';hideReadingScreens();$('readingOverview').style.display='block';
 }
 async function loadReading(n){
@@ -1626,7 +1623,7 @@ function easyTopicBlueprint(id,name){
 function easyTemplate(name,id){const b=easyTopicBlueprint(id,name);return b.frames.join('\n');}
 function defaultWritingData(cat,id,name){if(cat==='easy'){const b=easyTopicBlueprint(id,name);return {title:name,category:'Easy Writing',level:'Beginner',fields:b.fields,frames:b.frames,template:easyTemplate(name,id)};}return {title:name,category:'Guided Writing',taskType:id,template:ECL_WRITING_TEMPLATES[id]||'INTRODUCTION: [Write your introduction here.]\n\nBODY: [Develop your main ideas with explanations and examples.]\n\nCONCLUSION: [Summarise your answer.]',usefulLanguage:['To begin with','Furthermore','For example','As a result','In conclusion'],plan:['Understand the task','Choose your main ideas','Add explanations and examples','Check grammar and vocabulary']};}
 function openWritingDetail(cat,id,name,desc){eclWritingCurrent={cat,id,name};writingScreens();$('writingDetail').style.display='block';$('writingDetailTitle').textContent=name;$('writingDetailDescription').textContent=desc;let data=defaultWritingData(cat,id,name);try{const raw=localStorage.getItem(writingKey(cat,id));if(raw)data=JSON.parse(raw);}catch(e){}$('writingDetailTemplate').textContent=data.template||JSON.stringify(data,null,2);$('writingUploadStatus').textContent='Built-in template loaded. Upload your own JSON to replace the displayed template for this topic.';const area=$('writingStudentArea');area.innerHTML='';if(cat==='advanced'){const b=document.createElement('button');b.type='button';b.textContent='Start 40-minute independent task';b.style.width='100%';b.onclick=()=>startAdvancedWriting(name,desc);area.appendChild(b);}else if(cat==='easy'){renderEasyWritingBuilder(area,data,id);}else{const h=document.createElement('h3');h.textContent='Your writing';area.appendChild(h);const ta=document.createElement('textarea');ta.className='writing-input';ta.rows=9;ta.placeholder='Write your own response here...';ta.id='writingPracticeAnswer';area.appendChild(ta);const save=document.createElement('button');save.type='button';save.className='secondary';save.textContent='Save my practice';save.onclick=()=>{try{localStorage.setItem('ecl_writing_draft_'+cat+'_'+id,ta.value);$('writingUploadStatus').textContent='Your practice has been saved on this device.';}catch(e){$('writingUploadStatus').textContent='Could not save on this device.';}};area.appendChild(save);try{ta.value=localStorage.getItem('ecl_writing_draft_'+cat+'_'+id)||'';}catch(e){}}
- const input=$('writingJsonUpload');input.value='';input.onchange=()=>uploadWritingJson(input.files&&input.files[0]);}
+ const input=$('writingJsonUpload');if(input){input.value='';input.onchange=()=>uploadWritingJson(input.files&&input.files[0]);}}
 function renderEasyWritingBuilder(area,data,id){
  const h=document.createElement('h3');h.textContent='Build your own text';area.appendChild(h);
  const intro=document.createElement('p');intro.className='muted';intro.textContent='Complete the missing information. Some parts of each sentence are already written for you. Add your own words to make the text personal.';area.appendChild(intro);
@@ -2211,10 +2208,6 @@ async function renderCertificates(){
 
 /* Teacher tools are hidden unless Firestore profile explicitly marks an approved teacher/admin. */
 function openTeacherPlanner(){
-  if(!eclCanUseTeacherTools()){
-    alert('Teacher access is restricted. Please ask the project administrator to approve your teacher account.');
-    return;
-  }
   stopQuestionClock();
   ['home','quiz','result'].forEach(id=>{const el=$(id);if(el)el.style.display='none';});
   hideGrammarScreens();hideUnitScreens();hideLearningModuleScreens();hideReadingScreens();writingScreens();
